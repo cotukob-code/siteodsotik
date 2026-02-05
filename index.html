@@ -1,47 +1,86 @@
 <!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Игры - СайтСотика</title>
+
+    <!-- IMPORTANT:
+         If you need the page to resolve local relative links/assets correctly when the file
+         is placed in nested directories, use a base href.
+         - For serving from a site root (example: https://example.com/) keep as below: "/"
+         - For serving from a repository subpath (example: https://user.github.io/repo/) set to "/repo/"
+         - If you want links to remain relative to the current directory (default browser behavior),
+           comment out or remove the <base> element.
+    -->
+    <base href="/" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Rajdhani', sans-serif; background: #0a0a0a; color: #f5f5f5; }
+        :root {
+            --bg: #0a0a0a;
+            --card: #0f0f0f;
+            --muted: #9ca3af;
+            --accent: #ef4444; /* red-500 */
+            --text: #f5f5f5;
+        }
+        html,body { height:100%; }
+        body {
+            margin: 0;
+            font-family: 'Rajdhani', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing:antialiased;
+            -moz-osx-font-smoothing:grayscale;
+        }
         .racing-font { font-family: 'Orbitron', sans-serif; }
+        /* simple container max width for non-tailwind fallbacks */
+        .container { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
     </style>
 </head>
 <body class="min-h-screen">
-    <div class="container mx-auto px-4 py-16">
-        <h1 class="racing-font text-4xl md:text-6xl text-center text-red-500 mb-12">ГОНОЧНЫЕ ИГРЫ</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-gray-900 p-6 rounded-xl">
-                <h2 class="racing-font text-2xl text-red-500 mb-4">Forza Motorsport</h2>
-                <p>Реалистичный симулятор от Xbox с феноменальной графикой и физикой. Идеален для поклонников настоящих гонок.</p>
-            </div>
-            <div class="bg-gray-900 p-6 rounded-xl">
-                <h2 class="racing-font text-2xl text-red-500 mb-4">Gran Turismo 7</h2>
-                <p>Легендарная серия от PlayStation продолжает удивлять качеством и глубиной. Мечта каждого автолюбителя.</p>
-            </div>
-            <div class="bg-gray-900 p-6 rounded-xl">
-                <h2 class="racing-font text-2xl text-red-500 mb-4">Assetto Corsa</h2>
-                <p>Любимец симуляторов с невероятной физикой и огромным сообществом моддеров. Стандарт де-факто в жанре.</p>
-            </div>
-            <div class="bg-gray-900 p-6 rounded-xl">
-                <h2 class="racing-font text-2xl text-red-500 mb-4">Need for Speed</h2>
-                <p>Икона уличных гонок и дрифта. Адреналин, скорость и свобода - вот что делает эту серию особенной.</p>
-            </div>
-            <div class="bg-gray-900 p-6 rounded-xl">
-                <h2 class="racing-font text-2xl text-red-500 mb-4">iRacing</h2>
-                <p>Самый строгий и реалистичный симулятор. Требует серьезного подхода, но вознаграждает настоящим ощущением гонок.</p>
-            </div>
-            <div class="bg-gray-900 p-6 rounded-xl">
-                <h2 class="racing-font text-2xl text-red-500 mb-4">F1 23</h2>
-                <p>Официальная игра чемпионата Формулы 1. Погрузитесь в мир королевских гонок со всеми командами и трассами.</p>
-            </div>
-        </div>
-    </div>
+    <main class="container mx-auto px-4 py-16" role="main" aria-labelledby="page-title">
+        <h1 id="page-title" class="racing-font text-4xl md:text-6xl text-center text-red-500 mb-12">ГОНОЧНЫЕ ИГРЫ</h1>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" aria-label="Список гоночных игр">
+            <article class="bg-gray-900 p-6 rounded-xl" aria-labelledby="forza-title">
+                <h2 id="forza-title" class="racing-font text-2xl text-red-500 mb-4">Forza Motorsport</h2>
+                <p>Реали��тичный симулятор от Xbox с феноменальной графикой и продуманной физикой. Идеален для поклонников настоящего автоспорта — поддерживает широкий выбор автомобилей и трасс, регулярные обновления и соревновательные режимы.</p>
+            </article>
+
+            <article class="bg-gray-900 p-6 rounded-xl" aria-labelledby="gt7-title">
+                <h2 id="gt7-title" class="racing-font text-2xl text-red-500 mb-4">Gran Turismo 7</h2>
+                <p>Легендарная серия от PlayStation продолжает удивлять качеством и глубиной проработки. Огромная подборка автомобилей, реалистичная физика и учебные режимы для тех, кто хочет улучшать навыки вождения.</p>
+            </article>
+
+            <article class="bg-gray-900 p-6 rounded-xl" aria-labelledby="assetto-title">
+                <h2 id="assetto-title" class="racing-font text-2xl text-red-500 mb-4">Assetto Corsa</h2>
+                <p>Любимец сообщества симуляторов: невероятная физика, настройка машин и большое сообщество моддеров. Подходит для тех, кто ценит реализм и гибкость за счет пользовательских модов.</p>
+            </article>
+
+            <article class="bg-gray-900 p-6 rounded-xl" aria-labelledby="nfs-title">
+                <h2 id="nfs-title" class="racing-font text-2xl text-red-500 mb-4">Need for Speed</h2>
+                <p>Икона уличных гонок и дрифта. Адреналин, скорость и свобода — серия ориентирована на динамичные заезды и атмосферные истории, а не на сверхреализм.</p>
+            </article>
+
+            <article class="bg-gray-900 p-6 rounded-xl" aria-labelledby="iracing-title">
+                <h2 id="iracing-title" class="racing-font text-2xl text-red-500 mb-4">iRacing</h2>
+                <p>Один из самых строгих и реалистичных симуляторов: серьезный подход к сетевому соревнованию, лицензированным трассам и точной телеметрии. Подойдёт тем, кто готов инвестировать время в улучшение навыков.</p>
+            </article>
+
+            <article class="bg-gray-900 p-6 rounded-xl" aria-labelledby="f1-title">
+                <h2 id="f1-title" class="racing-font text-2xl text-red-500 mb-4">F1 23</h2>
+                <p>Официальная игра чемпионата Формулы 1. Полная погруженность в мир королевских гонок: команды, пилоты, режимы карьеры и актуальные правила сезона.</p>
+            </article>
+        </section>
+    </main>
+
+    <footer class="container mx-auto px-4 py-8 text-center text-sm text-gray-400">
+        <p>© СайтСотика — все права защищены.</p>
+    </footer>
 </body>
+</html>
 </html>
