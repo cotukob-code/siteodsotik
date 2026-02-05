@@ -1,30 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Local SE Overlay</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Local StreamElements Overlay</title>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            background: #000;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-        }
-
-        #overlay {
-            width: 100vw;
-            height: 100vh;
-            border: none;
-        }
+        html,body{height:100%;margin:0;background:#000}
+        iframe{position:fixed;inset:0;width:100%;height:100%;border:0}
+        .notice{position:fixed;left:8px;top:8px;color:#fff;background:rgba(0,0,0,.5);padding:6px 10px;border-radius:6px;font-family:sans-serif}
     </style>
 </head>
 <body>
-<iframe
-        id="overlay"
-        src="https://streamelements.com/overlay/698430e5e06e8f923992152a/cLXXYw0lKkeSHf32bc3jNMIVeGxfVNu_yZ9ZqLGI9wNMZ-Vj"
-        allowfullscreen>
-</iframe>
+<div class="notice">Оверлей StreamElements — откройте через <a href="/overlay-local.html">localhost</a> или в StreamElements Preview</div>
+<iframe id="overlay" src="https://streamelements.com/overlay/698430e5e06e8f923992152a/cLXXYw0lKkeSHf32bc3jNMIVeGxfVNu_yZ9ZqLGI9wNMZ-Vj" allowfullscreen></iframe>
 </body>
 </html>
