@@ -1,299 +1,732 @@
-<!doctype html>
-<html lang="ru" class="h-full">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>СайтСотика - Игры про гонки</title>
-  <meta name="description" content="СайтСотика - всё о гоночных играх, включая Forza Motorsport и аналоги">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="./_sdk/element_sdk.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Orbitron:wght@400;700;900&amp;family=Rajdhani:wght@400;600;700&amp;family=Russo+One&amp;family=Saira+Condensed:wght@400;700&amp;display=swap" rel="stylesheet">
+  <title>Дмитрий Передний — Преподаватель вождения на симуляторе</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Обучение вождению на гоночном симуляторе. Уроки, разборы, методика, подготовка к реальному вождению.">
   <style>
-    body {
-        box-sizing: border-box;
+    :root {
+      --bg: #05060a;
+      --bg-alt: #0c0f18;
+      --accent: #ff3b3b;
+      --accent-soft: #ff7a3b;
+      --text: #f5f5f5;
+      --muted: #a0a4b8;
+      --card: #111522;
+      --border: #22283a;
+      --radius: 10px;
     }
-
     * {
-        box-sizing: border-box;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-
-    html {
-        background: #000000;
-    }
-
     body {
-        margin: 0;
-        padding: 0;
-        max-width: 1920px;
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151a2b 0, #05060a 55%);
+      color: var(--text);
+      line-height: 1.6;
     }
-
-    *::-webkit-scrollbar {
-        width: 12px;
+    a {
+      color: var(--accent-soft);
+      text-decoration: none;
     }
-
-    *::-webkit-scrollbar-track {
-        background: #0a0a0a;
-        border-left: 1px solid #ef4444;
+    a:hover {
+      text-decoration: underline;
     }
-
-    *::-webkit-scrollbar-thumb {
-        background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
-        border-radius: 6px;
+    header {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(90deg, rgba(255,59,59,0.12), transparent);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
     }
-
-    *::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+    .nav {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
-
-    .racing-font {
-        font-family: 'Orbitron', sans-serif;
-        letter-spacing: 0.05em;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 13px;
+      color: var(--muted);
     }
-
-    .accent-font {
-        font-family: 'Bebas Neue', cursive;
-        letter-spacing: 0.08em;
+    .logo-mark {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #ffffff 0, #ff3b3b 35%, #ff7a3b 70%, #05060a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 18px rgba(255,59,59,0.6);
+      position: relative;
+      overflow: hidden;
     }
-
-    .body-font {
-        font-family: 'Rajdhani', sans-serif;
-        letter-spacing: 0.02em;
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border-radius: inherit;
+      border: 1px solid rgba(0,0,0,0.45);
     }
-
-    .elite-font {
-        font-family: 'Russo One', sans-serif;
-        letter-spacing: 0.06em;
+    .logo-mark span {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
     }
-
-    .condensed-font {
-        font-family: 'Saira Condensed', sans-serif;
-        letter-spacing: 0.04em;
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
     }
-
-    @keyframes navbarSlideDown {
-        0% {
-            transform: translateY(-100%);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
-        }
+    .nav-links a {
+      color: var(--muted);
+      position: relative;
+      padding-bottom: 2px;
     }
-
-    @keyframes navbarBorderGlow {
-        0%, 100% {
-            border-bottom-color: #ef4444;
-            box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);
-        }
-        50% {
-            border-bottom-color: #f59e0b;
-            box-shadow: 0 4px 30px rgba(245, 158, 11, 0.5);
-        }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
+      transition: width 0.18s ease-out;
     }
-
-    @keyframes navLogoSpin {
-        0% {
-            transform: rotate(0deg) scale(1);
-        }
-        50% {
-            transform: rotate(180deg) scale(1.2);
-        }
-        100% {
-            transform: rotate(360deg) scale(1);
-        }
+    .nav-links a:hover::after {
+      width: 100%;
     }
-
-    @keyframes navLinkSlideIn {
-        0% {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        100% {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .nav-cta {
+      display: flex;
+      gap: 10px;
+      align-items: center;
     }
-
-    .nav-animated {
-        animation: navbarSlideDown 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
-                   navbarBorderGlow 4s ease-in-out infinite;
+    .btn {
+      border-radius: 999px;
+      padding: 7px 16px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      background: rgba(5,6,10,0.7);
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.18s ease-out, border-color 0.18s ease-out, transform 0.08s ease-out;
     }
-
-    .nav-logo-animated {
-        display: inline-block;
-        transition: all 0.3s ease;
+    .btn:hover {
+      background: rgba(15,18,30,0.95);
+      border-color: rgba(255,255,255,0.08);
+      transform: translateY(-1px);
     }
-
-    .nav-logo-animated:hover {
-        animation: navLogoSpin 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 0 18px rgba(255,59,59,0.55);
     }
-
-    .nav-link-animated {
-        position: relative;
-        animation: navLinkSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        transition: all 0.3s ease;
+    .btn-primary:hover {
+      box-shadow: 0 0 26px rgba(255,59,59,0.8);
     }
-
-    .nav-link-animated::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #ef4444, #f59e0b);
-        transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    .menu-toggle {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(5,6,10,0.9);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
     }
-
-    .nav-link-animated:hover::after {
-        width: 100%;
+    .menu-toggle span {
+      width: 16px;
+      height: 2px;
+      background: var(--muted);
+      position: relative;
     }
-
-    .nav-link-animated:hover {
-        transform: translateY(-3px) scale(1.05);
-        text-shadow: 0 0 10px currentColor;
+    .menu-toggle span::before,
+    .menu-toggle span::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 16px;
+      height: 2px;
+      background: var(--muted);
     }
-
-    @keyframes menuSlideIn {
-        0% {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        100% {
-            transform: translateX(0);
-            opacity: 1;
-        }
+    .menu-toggle span::before {
+      top: -5px;
     }
-
-    @keyframes menuItemStagger {
-        0% {
-            opacity: 0;
-            transform: translateX(50px) rotate(5deg);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0) rotate(0deg);
-        }
+    .menu-toggle span::after {
+      top: 5px;
     }
-
-    .mobile-menu-animated {
-        animation: menuSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 26px 18px 60px;
     }
-
-    .menu-item-stagger {
-        animation: menuItemStagger 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
+      gap: 32px;
+      align-items: center;
+      padding: 26px 0 34px;
     }
-
-    @keyframes heroTitleSplit {
-        0% {
-            opacity: 0;
-            transform: translateX(-100px) skewX(-20deg);
-            filter: blur(10px);
-        }
-        60% {
-            transform: translateX(10px) skewX(5deg);
-        }
-        100% {
-            opacity: 1;
-            transform: translateX(0) skewX(0deg);
-            filter: blur(0);
-        }
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.15;
+      margin-bottom: 10px;
     }
-
-    /* ... rest of CSS unchanged ... */
+    .hero-title span {
+      background: linear-gradient(120deg, #ffffff, #ffb3b3);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .hero-sub {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      max-width: 520px;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: radial-gradient(circle at top left, rgba(255,59,59,0.35), rgba(5,6,10,0.9));
+      color: #fbe9e9;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .hero-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .hero-note strong {
+      color: #fff;
+      font-weight: 600;
+    }
+    .hero-card {
+      border-radius: 18px;
+      background: radial-gradient(circle at top, #1b2135 0, #05060a 55%);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 16px 14px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    }
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at 10% 0, rgba(255,59,59,0.35), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .hero-card-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+    .hero-card-status {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(5,6,10,0.7);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+    }
+    .hero-card-status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #3bff7a;
+      box-shadow: 0 0 10px rgba(59,255,122,0.8);
+    }
+    .hero-track {
+      margin-top: 6px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.06), rgba(0,0,0,0.9));
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 10px 10px 9px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-track-lane {
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-track-car {
+      position: absolute;
+      top: -6px;
+      left: 18%;
+      width: 22px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #ff3b3b, #ffb33b);
+      box-shadow: 0 0 16px rgba(255,59,59,0.9);
+      transform: skewX(-12deg);
+    }
+    .hero-track-car::after {
+      content: "";
+      position: absolute;
+      inset: 3px 4px;
+      border-radius: inherit;
+      border: 1px solid rgba(0,0,0,0.6);
+    }
+    .hero-track-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .hero-track-meta strong {
+      color: #fff;
+      font-weight: 600;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 8px;
+      margin-top: 10px;
+      font-size: 11px;
+    }
+    .metric {
+      padding: 7px 8px;
+      border-radius: 10px;
+      background: rgba(5,6,10,0.8);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .metric-label {
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .metric-value {
+      font-weight: 600;
+      color: #fff;
+    }
+    section {
+      margin-top: 34px;
+    }
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1.1fr);
+      gap: 22px;
+    }
+    .card {
+      border-radius: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 14px 14px 12px;
+    }
+    .card h3 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .list {
+      list-style: none;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .list li {
+      padding-left: 16px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+    .list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      color: var(--accent-soft);
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .pill {
+      font-size: 11px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      background: rgba(5,6,10,0.8);
+    }
+    .lessons-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .lesson {
+      padding: 8px 9px;
+      border-radius: 10px;
+      background: rgba(5,6,10,0.9);
+      border: 1px solid rgba(255,255,255,0.06);
+      font-size: 13px;
+    }
+    .lesson-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .lesson-meta {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
+      gap: 22px;
+    }
+    .contact-item {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .contact-item strong {
+      color: #fff;
+      font-weight: 600;
+    }
+    .contact-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 14px 18px 20px;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      background: #05060a;
+    }
+    @media (max-width: 840px) {
+      .hero {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-card {
+        order: -1;
+      }
+      .section-grid,
+      .contact-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+    @media (max-width: 720px) {
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+      .menu-toggle {
+        display: inline-flex;
+      }
+      main {
+        padding-inline: 14px;
+      }
+      .hero {
+        padding-top: 18px;
+      }
+    }
   </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="./_sdk/data_sdk.js" type="text/javascript"></script>
 </head>
-<body class="h-full w-full body-font overflow-auto" style="background: #0a0a0a;">
-<nav class="w-full fixed top-0 z-50 nav-animated" style="background: rgba(10, 10, 10, 0.95); backdrop-filter: blur(10px); border-bottom: 2px solid #ef4444;">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-4">
-      <div class="racing-font text-3xl font-bold elite-text-gradient nav-logo-animated">
-        🏎️ САЙТСОТИКА
+<body>
+  <header>
+    <div class="nav">
+      <div class="logo">
+        <div class="logo-mark"><span>DP</span></div>
+        <span>Sim Racing Instructor</span>
       </div>
-      <div class="hidden md:flex space-x-8 body-font font-semibold"><a href="#hero" class="nav-link-animated delay-100 hover:text-red-500 transition" style="color: #f5f5f5;">Главная</a> <a href="about/index.html" class="nav-link-animated delay-200 hover:text-red-500 transition" style="color: #f5f5f5;">Обо мне</a> <a href="games/index.html" class="nav-link-animated delay-300 hover:text-red-500 transition" style="color: #f5f5f5;">Игры</a> <a href="stream/index.html" class="nav-link-animated delay-400 hover:text-red-500 transition" style="color: #f5f5f5;">Стрим</a> <a href="team/index.html" class="nav-link-animated delay-500 hover:text-red-500 transition" style="color: #f5f5f5;">Команда</a> <a href="partners/index.html" class="nav-link-animated delay-600 hover:text-red-500 transition" style="color: #f5f5f5;">Партнеры</a>
-      </div><button id="mobile-menu-button" class="md:hidden p-2 rounded-lg" style="background: #ef4444; color: #ffffff; border: none; cursor: pointer;">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg></button>
-    </div>
-  </div>
-</nav>
-<div id="mobile-menu" class="fixed inset-0 z-40 hidden">
-  <div class="absolute inset-0" style="background: rgba(0, 0, 0, 0.8);" onclick="closeMobileMenu()"></div>
-  <div class="absolute right-0 top-0 h-full w-64 mobile-menu-animated" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); box-shadow: -5px 0 25px rgba(239, 68, 68, 0.3);">
-    <div class="p-6"><button onclick="closeMobileMenu()" class="mb-8 p-2 rounded-lg" style="background: #ef4444; color: #ffffff; border: none; cursor: pointer;">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
-      <div class="flex flex-col space-y-6 body-font font-semibold text-lg"><a href="#hero" class="menu-item-stagger delay-100" style="color: #f5f5f5;" onclick="closeMobileMenu()">Главная</a> <a href="about/index.html" class="menu-item-stagger delay-200" style="color: #f5f5f5;" onclick="closeMobileMenu()">Обо мне</a> <a href="games/index.html" class="menu-item-stagger delay-300" style="color: #f5f5f5;" onclick="closeMobileMenu()">Игры</a> <a href="stream/index.html" class="menu-item-stagger delay-400" style="color: #f5f5f5;" onclick="closeMobileMenu()">Стрим</a> <a href="team/index.html" class="menu-item-stagger delay-500" style="color: #f5f5f5;" onclick="closeMobileMenu()">Команда</a> <a href="partners/index.html" class="menu-item-stagger delay-600" style="color: #f5f5f5;" onclick="closeMobileMenu()">Партнеры</a>
+      <nav class="nav-links">
+        <a href="#about">О преподавателе</a>
+        <a href="#program">Программа</a>
+        <a href="#lessons">Уроки</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <div class="nav-cta">
+        <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Задать вопрос</button>
+        <button class="btn btn-primary" onclick="document.getElementById('lessons').scrollIntoView({behavior:'smooth'})">Записаться на урок</button>
+        <button class="menu-toggle" aria-label="Меню"><span></span></button>
       </div>
     </div>
-  </div>
-</div>
-<!-- rest of the body unchanged until the reviewMap definition -->
-<!-- ... -->
-<script>
-  const defaultConfig = {
-    hero_title: "ГОНОЧНАЯ СТРАСТЬ",
-    hero_subtitle: "Всё о лучших гоночных играх мира",
-    hero_button: "НАЧАТЬ ГОНКУ",
-    reviews_title: "ОБЗОРЫ ЭКСПЕРТОВ",
-    games_title: "ТОПОВЫЕ ИГРЫ",
-    news_title: "ПОСЛЕДНИЕ НОВОСТИ",
-    stats_title: "В ЦИФРАХ",
-    community_title: "КОМАНДА",
-    newsletter_title: "ПАРТНЕРЫ"
-  };
+  </header>
 
-  let currentSlide = 0;
-  const totalSlides = 2;
+  <main>
+    <section class="hero" id="top">
+      <div>
+        <div class="hero-tags">
+          <div class="tag">Обучение вождению на симуляторе</div>
+          <div class="tag">Практика без риска</div>
+        </div>
+        <h1 class="hero-title">
+          <span>Дмитрий Передний</span><br>
+          преподаватель вождения на гоночном симуляторе
+        </h1>
+        <p class="hero-sub">
+          Помогаю безопасно освоить основы вождения, траектории, работу с педалями и рулём на гоночном симуляторе.
+          Это тренировочная среда, где можно допускать ошибки, разбирать их и прогрессировать без риска для жизни и автомобиля.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="document.getElementById('lessons').scrollIntoView({behavior:'smooth'})">Посмотреть формат занятий</button>
+          <button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Подробнее обо мне</button>
+        </div>
+        <p class="hero-note">
+          <strong>Важно:</strong> это образовательный курс на симуляторе, а не выдача прав и не автошкола.
+        </p>
+      </div>
+      <div class="hero-card" aria-hidden="true">
+        <div class="hero-card-inner">
+          <div class="hero-card-header">
+            <div class="hero-card-title">Сессия тренировки</div>
+            <div class="hero-card-status">
+              <span class="hero-card-status-dot"></span>
+              Онлайн‑занятие активно
+            </div>
+          </div>
+          <div class="hero-track">
+            <div class="hero-track-lane">
+              <div class="hero-track-car"></div>
+            </div>
+            <div class="hero-track-meta">
+              <span>Режим: <strong>Тренировка траекторий</strong></span>
+              <span>Сессия: <strong>45 минут</strong></span>
+            </div>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <div class="metric-label">Фокус</div>
+              <div class="metric-value">Контроль руля и педалей</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Цель</div>
+              <div class="metric-value">Плавность и стабильность</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Формат</div>
+              <div class="metric-value">Онлайн + разбор</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  /* slider functions omitted for brevity */
+    <section id="about">
+      <div class="section-label">О преподавателе</div>
+      <h2 class="section-title">Кто я и чему обучаю</h2>
+      <div class="section-grid">
+        <div class="card">
+          <h3>Дмитрий Передний — преподаватель вождения на симуляторе</h3>
+          <p>
+            Я работаю с гоночными симуляторами и использую их как безопасную платформу для обучения базовым и продвинутым
+            навыкам вождения. На занятиях мы разбираем не только «как ехать быстро», но и то, как формируется контроль
+            автомобиля, внимание, работа с ошибками и понимание траекторий.
+          </p>
+          <p>
+            Формат обучения подходит тем, кто:
+          </p>
+          <ul class="list">
+            <li>хочет безопасно познакомиться с вождением через симулятор;</li>
+            <li>интересуется гоночной тематикой и хочет понимать, как работают пилоты;</li>
+            <li>уже водит, но хочет улучшить чувство машины и траектории в игровой среде;</li>
+            <li>использует симулятор как тренировочный инструмент.</li>
+          </ul>
+          <div class="pill-row">
+            <div class="pill">Онлайн‑формат</div>
+            <div class="pill">Разбор ошибок</div>
+            <div class="pill">Пошаговое обучение</div>
+            <div class="pill">Безопасная среда</div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Образовательный формат, а не автошкола</h3>
+          <p>
+            Важно понимать: мои занятия — это образовательный курс на симуляторе. Я не выдаю права, не заменяю автошколу
+            и не оформляю официальные документы. Моя задача — дать тебе практическое понимание вождения в безопасной
+            цифровой среде, чтобы ты мог осознанно подходить к реальному вождению или просто развиваться в сим‑рейсинге.
+          </p>
+          <p>
+            На сайте представлены:
+          </p>
+          <ul class="list">
+            <li>описание программы обучения;</li>
+            <li>структура уроков и примеры тем;</li>
+            <li>формат обратной связи и разборов;</li>
+            <li>контакты для связи и записи на занятия.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  /*
-    🔥 ВАЖНО: ВСЕ пути теперь относительные.
-    Никаких /reviews/... — только reviews/...
-    Это полностью убирает CORS.
-  */
-  const reviewMap = {
-    forza7: { title: "Forza Motorsport 7", url: "games/ForzaMotorsport7.html" },
-    forza2023: { title: "Forza Motorsport 2023", url: "games/ForzaMotorsport2023.html" },
-    acc: { title: "Assetto Corsa Competizione", url: "reviews/acc.html" },
-    iracing: { title: "iRacing", url: "reviews/iracing.html" },
-    gt7: { title: "Gran Turismo 7", url: "reviews/gt7.html" },
-    pcars2: { title: "Project CARS 2", url: "reviews/pcars2.html" }
-  };
+    <section id="program">
+      <div class="section-label">Программа</div>
+      <h2 class="section-title">Как устроено обучение на симуляторе</h2>
+      <div class="section-grid">
+        <div class="card">
+          <h3>Структура курса</h3>
+          <p>
+            Обучение строится по модульной системе: от базового знакомства с управлением до более сложных элементов
+            вроде траекторий, точек торможения и стабильности круга. Каждый модуль можно проходить отдельно или в рамках
+            последовательной программы.
+          </p>
+          <ul class="list">
+            <li>Модуль 1: знакомство с симулятором и управлением;</li>
+            <li>Модуль 2: базовые траектории и работа с рулём;</li>
+            <li>Модуль 3: торможение, ускорение, плавность;</li>
+            <li>Модуль 4: стабильность круга и работа над ошибками;</li>
+            <li>Модуль 5: продвинутые элементы (по договорённости).</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Формат занятий</h3>
+          <p>
+            Занятия проходят онлайн. Мы подключаемся к сессии, я наблюдаю за твоей ездой, даю комментарии в реальном
+            времени и фиксирую моменты, которые нужно доработать. После сессии возможен короткий разбор и рекомендации
+            по самостоятельной практике.
+          </p>
+          <ul class="list">
+            <li>Продолжительность одного занятия: 45–60 минут;</li>
+            <li>Формат: онлайн‑сессия + голосовая связь;</li>
+            <li>Платформа: гоночный симулятор (по договорённости);</li>
+            <li>Обратная связь: устные комментарии, при необходимости — текстовые заметки.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-  function openReview(gameId) {
-    const review = reviewMap[gameId];
-    if (!review) return;
+    <section id="lessons">
+      <div class="section-label">Уроки</div>
+      <h2 class="section-title">Примеры тем занятий</h2>
+      <div class="card">
+        <p>
+          Ниже — примеры уроков, которые я провожу на симуляторе. Конкретное содержание подстраивается под твой уровень
+          и задачи. Эти материалы можно использовать как описание образовательной программы при подаче заявки в Canva
+          for Education.
+        </p>
+        <div class="lessons-list">
+          <div class="lesson">
+            <div class="lesson-title">Урок 1. Знакомство с симулятором и управлением</div>
+            <div class="lesson-meta">
+              Цель: понять базовую логику управления, чувствительность руля и педалей, научиться уверенно двигаться по прямой и входить в простые повороты.
+            </div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-title">Урок 2. Траектории и работа с рулём</div>
+            <div class="lesson-meta">
+              Цель: освоить базовые траектории, научиться правильно заходить в поворот, выбирать точку входа и выхода, работать с рулём без резких движений.
+            </div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-title">Урок 3. Торможение и ускорение</div>
+            <div class="lesson-meta">
+              Цель: научиться плавно тормозить и разгоняться, понимать, как распределяется сцепление, и почему резкие движения делают машину нестабильной.
+            </div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-title">Урок 4. Стабильность круга</div>
+            <div class="lesson-meta">
+              Цель: собрать несколько кругов подряд без грубых ошибок, удерживать ритм, контролировать внимание и не «ломаться» после одной неточности.
+            </div>
+          </div>
+          <div class="lesson">
+            <div class="lesson-title">Урок 5. Разбор ошибок и развитие</div>
+            <div class="lesson-meta">
+              Цель: разобрать записи сессии (если есть), выделить повторяющиеся ошибки, составить план дальнейшей практики и развития навыков.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    const isMobile = window.innerWidth <= 768;
-    const iframeSrc = `${review.url}?view=embedded`;
+    <section id="contact">
+      <div class="section-label">Контакты</div>
+      <h2 class="section-title">Связаться со мной</h2>
+      <div class="contact-grid">
+        <div class="card">
+          <h3>Как со мной связаться</h3>
+          <p class="contact-item">
+            <strong>Формат связи:</strong> напишите мне в удобный мессенджер или на почту, кратко опишите свой опыт и цель занятий.
+          </p>
+          <p class="contact-item">
+            <strong>Пример сообщения:</strong><br>
+            «Здравствуйте, меня зовут [имя]. Хочу позаниматься вождением на симуляторе. Уровень: [новичок / есть опыт]. Цель: [освоить базу / улучшить траектории / подготовиться к реальному вождению].»
+          </p>
+          <p class="contact-note">
+            Эти контакты и описание можно использовать как часть подтверждения образовательной деятельности при подаче заявки в Canva for Education.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Информация для Canva for Education</h3>
+          <p>
+            При подаче заявки вы можете указать этот сайт как платформу, на которой вы ведёте образовательную деятельность
+            по обучению вождению на симуляторе. Формулировка для заявки:
+          </p>
+          <p style="font-size:13px;color:var(--muted);margin-top:4px;">
+            «I teach online using a driving simulator. On my website I publish the structure of my lessons, educational
+            materials and description of my training program. I use Canva to prepare visual materials, diagrams and
+            explanations for my students.»
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    if (isMobile) {
-      document.getElementById('mobile-review-title').textContent = review.title;
-      document.getElementById('mobile-review-iframe').src = iframeSrc;
-      const modal = document.getElementById('mobile-review-modal');
-      modal.classList.remove('hidden');
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    } else {
-      const reviewColumn = document.getElementById('review-column');
-      const iframe = document.getElementById('review-column-iframe');
-      const titleEl = document.getElementById('review-column-title');
-
-      iframe.src = iframeSrc;
-      titleEl.textContent = review.title;
-      reviewColumn.classList.remove('hidden');
-    }
-  }
-
-  /* rest unchanged */
-</script>
+  <footer>
+    Дмитрий Передний · Обучение вождению на гоночном симуляторе · Образовательный неофициальный курс на базе симулятора
+  </footer>
 </body>
 </html>
