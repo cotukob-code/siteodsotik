@@ -2,79 +2,39 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Донаты — API DonationAlerts</title>
+  <title>Последние донаты — DonationAlerts</title>
   <style>
     body {
+      margin: 0;
+      padding: 20px;
       background: #0f0f0f;
       color: #fff;
       font-family: Arial, sans-serif;
-      padding: 20px;
     }
-    #donations {
-      max-width: 600px;
+    #da-widget {
+      max-width: 700px;
       margin: 0 auto;
+      padding: 12px;
       background: #181818;
-      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-    .donation {
-      padding: 10px;
-      border-bottom: 1px solid #333;
-    }
-    .donation:last-child {
-      border-bottom: none;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
     }
   </style>
 </head>
 <body>
 
   <h1>Последние донаты</h1>
-  <div id="donations">Загрузка...</div>
 
-  <script>
-    const CLIENT_ID = "2289490"; // твой ID
-    const ACCESS_TOKEN = "W965bulACfZiXZ9rJUip"; // твой токен
-
-    async function loadDonations() {
-      try {
-        const res = await fetch(
-          `https://www.donationalerts.com/api/v1/alerts/donations?limit=10`,
-          {
-            headers: {
-              "Authorization": "Bearer " + ACCESS_TOKEN
-            }
-          }
-        );
-
-        const data = await res.json();
-        const box = document.getElementById("donations");
-
-        if (!data.data || data.data.length === 0) {
-          box.innerHTML = "Донатов пока нет.";
-          return;
-        }
-
-        box.innerHTML = "";
-
-        data.data.forEach(d => {
-          const div = document.createElement("div");
-          div.className = "donation";
-          div.innerHTML = `
-            <strong>${d.username}</strong> отправил <strong>${d.amount} ₽</strong><br>
-            <em>${d.message || "Без сообщения"}</em>
-          `;
-          box.appendChild(div);
-        });
-
-      } catch (e) {
-        document.getElementById("donations").innerHTML = "Ошибка загрузки.";
-      }
-    }
-
-    loadDonations();
-    setInterval(loadDonations, 5000); // обновление каждые 5 секунд
-  </script>
+  <div id="da-widget">
+    <iframe
+      src="https://www.donationalerts.com/widget/lastdonations?token=W965bulACfZiXZ9rJUip"
+      width="100%"
+      height="600"
+      frameborder="0"
+      scrolling="no"
+      style="border: none; border-radius: 10px;">
+    </iframe>
+  </div>
 
 </body>
 </html>
