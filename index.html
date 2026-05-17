@@ -2,49 +2,78 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Донаты — DonationAlerts</title>
+  <title>Донаты — API DonationAlerts</title>
   <style>
     body {
-      margin: 0;
-      padding: 20px;
       background: #0f0f0f;
       color: #fff;
       font-family: Arial, sans-serif;
+      padding: 20px;
     }
-    #da-wrap {
-      max-width: 700px;
+    #donations {
+      max-width: 600px;
       margin: 0 auto;
-      padding: 12px;
       background: #181818;
+      padding: 20px;
       border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    .donation {
+      padding: 10px;
+      border-bottom: 1px solid #333;
+    }
+    .donation:last-child {
+      border-bottom: none;
     }
   </style>
 </head>
 <body>
 
-  <h1>Донаты</h1>
-  <div id="da-wrap"></div>
+  <h1>Последние донаты</h1>
+  <div id="donations">Загрузка...</div>
 
   <script>
-    (function () {
-      const url = "https://www.donationalerts.com/widget/stream-stats/2289490?token=W965bulACfZiXZ9rJUip";
+    const CLIENT_ID = "2289490"; // твой ID
+    const ACCESS_TOKEN = "W965bulACfZiXZ9rJUip"; // твой токен
 
-      const wrap = document.getElementById("da-wrap");
-      if (!wrap) return;
+    async function loadDonations() {
+      try {
+        const res = await fetch(
+          `https://www.donationalerts.com/api/v1/alerts/donations?limit=10`,
+          {
+            headers: {
+              "Authorization": "Bearer " + ACCESS_TOKEN
+            }
+          }
+        );
 
-      const iframe = document.createElement("iframe");
-      iframe.src = url;
-      iframe.width = "100%";
-      iframe.height = "600";
-      iframe.frameBorder = "0";
-      iframe.scrolling = "no";
-      iframe.style.border = "none";
-      iframe.style.borderRadius = "10px";
-      iframe.style.overflow = "hidden";
+        const data = await res.json();
+        const box = document.getElementById("donations");
 
-      wrap.appendChild(iframe);
-    })();
+        if (!data.data || data.data.length === 0) {
+          box.innerHTML = "Донатов пока нет.";
+          return;
+        }
+
+        box.innerHTML = "";
+
+        data.data.forEach(d => {
+          const div = document.createElement("div");
+          div.className = "donation";
+          div.innerHTML = `
+            <strong>${d.username}</strong> отправил <strong>${d.amount} ₽</strong><br>
+            <em>${d.message || "Без сообщения"}</em>
+          `;
+          box.appendChild(div);
+        });
+
+      } catch (e) {
+        document.getElementById("donations").innerHTML = "Ошибка загрузки.";
+      }
+    }
+
+    loadDonations();
+    setInterval(loadDonations, 5000); // обновление каждые 5 секунд
   </script>
 
 </body>
