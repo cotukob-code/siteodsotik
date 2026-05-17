@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Последние донаты — DonationAlerts</title>
+  <title>5 Виджетов DonationAlerts</title>
   <style>
     body {
       margin: 0;
@@ -11,28 +11,73 @@
       color: #fff;
       font-family: Arial, sans-serif;
     }
-    #da-widget {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 12px;
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 10px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+    .widget-box {
+      max-width: 800px;
+      margin: 0 auto 40px auto;
       background: #181818;
+      padding: 15px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    iframe {
+      width: 100%;
+      border: none;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
 
-  <h1>Последние донаты</h1>
+  <h1>5 Виджетов DonationAlerts</h1>
 
-  <div id="da-widget">
+  <!-- 1. Последние донаты -->
+  <h2>Последние донаты</h2>
+  <div class="widget-box">
     <iframe
       src="https://www.donationalerts.com/widget/lastdonations?token=W965bulACfZiXZ9rJUip"
-      width="100%"
-      height="600"
-      frameborder="0"
-      scrolling="no"
-      style="border: none; border-radius: 10px;">
+      height="600">
+    </iframe>
+  </div>
+
+  <!-- 2. Топ донатеров -->
+  <h2>Топ донатеров</h2>
+  <div class="widget-box">
+    <iframe
+      src="https://www.donationalerts.com/widget/top?token=W965bulACfZiXZ9rJUip"
+      height="600">
+    </iframe>
+  </div>
+
+  <!-- 3. Цель донатов -->
+  <h2>Цель донатов</h2>
+  <div class="widget-box">
+    <iframe
+      src="https://www.donationalerts.com/widget/goal?token=W965bulACfZiXZ9rJUip"
+      height="250">
+    </iframe>
+  </div>
+
+  <!-- 4. Список донатов -->
+  <h2>Список донатов</h2>
+  <div class="widget-box">
+    <iframe
+      src="https://www.donationalerts.com/widget/donation-list?token=W965bulACfZiXZ9rJUip"
+      height="600">
+    </iframe>
+  </div>
+
+  <!-- 5. Алерты (как в OBS) -->
+  <h2>Алерты (реальные уведомления)</h2>
+  <div class="widget-box">
+    <iframe
+      src="https://www.donationalerts.com/widget/alerts?token=W965bulACfZiXZ9rJUip"
+      height="300">
     </iframe>
   </div>
 
