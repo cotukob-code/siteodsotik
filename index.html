@@ -2,439 +2,156 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <title>СайтСотика — Стрим</title>
+  <title>Поддержать СайтСотика</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     :root {
-      --bg: #050509;
-      --bg2: #0b0b12;
-      --card: rgba(10, 10, 20, 0.92);
+      --bg: #02030a;
       --accent: #ff9900;
-      --accent-soft: rgba(255, 153, 0, 0.18);
-      --border: rgba(120, 120, 160, 0.45);
-      --text: #f5f5f5;
+      --accent3: #ffdd99;
       --muted: #9a9ab5;
+      --glass: rgba(10,10,25,0.82);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #181830 0, #050509 55%);
-      color: var(--text);
-    }
-
-    .page {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* ===== HEADER / NAV ===== */
-
-    header {
-      padding: 18px 32px;
-      border-bottom: 1px solid rgba(40, 40, 70, 0.9);
+      height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      background:
-        linear-gradient(90deg, rgba(5, 5, 12, 0.96), rgba(10, 10, 25, 0.98)),
-        url("https://raw.githubusercontent.com/open-auction-repo/house-semyany/main/img/gallery/front.jpg") center/cover no-repeat;
-      position: relative;
-      overflow: hidden;
+      justify-content: center;
+      font-family: system-ui, sans-serif;
+      background: radial-gradient(circle at top, #26264a, #02030a);
+      color: white;
     }
 
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at right, rgba(0, 0, 0, 0.7), transparent 55%);
-      pointer-events: none;
+    .panel {
+      width: 90%;
+      max-width: 400px;
+      border-radius: 24px;
+      background: var(--glass);
+      border: 1px solid rgba(255,153,0,0.25);
+      box-shadow: 0 0 40px rgba(0,0,0,0.95), inset 0 0 40px rgba(255,153,0,0.15);
+      backdrop-filter: blur(18px);
+      padding: 30px 20px;
+      text-align: center;
     }
 
-    .header-inner {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
+    .status-icon {
+      font-size: 60px;
+      margin: 20px 0;
+      color: #3bd16f;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .logo-mark {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      background: radial-gradient(circle at 30% 20%, #fff 0, #ff9900 35%, #ff4b00 80%);
-      box-shadow: 0 0 22px rgba(255, 153, 0, 0.8);
-    }
-
-    .logo-text-main {
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .logo-text-sub {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    nav {
-      display: flex;
-      gap: 14px;
-      font-size: 14px;
-    }
-
-    .nav-link {
-      padding: 7px 14px;
-      border-radius: 999px;
-      color: var(--muted);
-      text-decoration: none;
-      border: 1px solid transparent;
-      background: rgba(5, 5, 15, 0.7);
-      backdrop-filter: blur(10px);
-      transition: 0.18s ease;
-    }
-
-    .nav-link:hover {
-      color: #fff;
-      border-color: rgba(120, 120, 160, 0.7);
-      background: rgba(20, 20, 40, 0.9);
-    }
-
-    .nav-link.active {
-      color: #000;
-      background: var(--accent);
-      border-color: var(--accent);
-      box-shadow: 0 0 18px rgba(255, 153, 0, 0.7);
-      font-weight: 600;
-    }
-
-    /* ===== CONTENT ===== */
-
-    .content {
-      flex: 1;
-      padding: 28px 32px 40px;
-      max-width: 1320px;
-      margin: 0 auto;
-    }
-
-    .stream-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 26px;
-    }
-
-    .stream-title {
-      font-size: 28px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .stream-sub {
-      font-size: 14px;
-      color: var(--muted);
-      margin-top: 6px;
-      max-width: 520px;
-    }
-
-    .stream-badge {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--accent-soft);
-      background: rgba(5, 5, 15, 0.95);
-      color: var(--accent);
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      backdrop-filter: blur(12px);
-    }
-
-    .stream-badge-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: #00ff66;
-      box-shadow: 0 0 10px rgba(0, 255, 102, 0.9);
-    }
-
-    /* ===== GRID ===== */
-
-    .grid {
-      display: grid;
-      grid-template-columns: 2fr 1.3fr;
-      gap: 22px;
-      margin-top: 6px;
-    }
-
-    .col {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .row-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    /* ===== CARDS ===== */
-
-    .card {
-      position: relative;
-      background: var(--card);
-      border-radius: 18px;
-      border: 1px solid var(--border);
-      padding: 16px 16px 14px;
-      box-shadow:
-        0 0 28px rgba(0, 0, 0, 0.85),
-        0 0 0 1px rgba(0, 0, 0, 0.7);
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at top left, rgba(255, 153, 0, 0.18), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(0, 180, 255, 0.12), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
-    .card-inner {
-      position: relative;
-      z-index: 1;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .status-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent3);
       margin-bottom: 10px;
     }
 
-    .card-title {
-      font-size: 17px;
-      font-weight: 600;
+    .status-text {
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 20px;
     }
 
-    .card-tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--muted);
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(80, 80, 120, 0.9);
-      background: rgba(5, 5, 15, 0.95);
-    }
-
-    .card-body {
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000;
-    }
-
-    iframe {
-      width: 100%;
-      border: none;
+    .donate-qr {
+      width: 180px;
+      height: 180px;
+      border-radius: 16px;
+      margin: 20px auto;
       display: block;
-      background: #000;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
     }
 
-    /* ===== FOOTER ===== */
+    .pay-btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #3bd16f;
+      color: #000;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 10px;
+    }
 
-    footer {
-      padding: 16px 32px 22px;
-      font-size: 12px;
-      color: var(--muted);
-      border-top: 1px solid rgba(40, 40, 70, 0.9);
+    .pay-btn:hover {
+      background: #2ec55e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(46, 197, 94, 0.3);
+    }
+
+    input {
+      width: 80%;
+      max-width: 200px;
+      padding: 10px;
+      margin: 10px auto;
+      border-radius: 8px;
+      border: 1px solid #ff9900;
+      background: rgba(255,255,255,0.1);
+      color: white;
       text-align: center;
-      background: #05050a;
-    }
-
-    @media (max-width: 1100px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 780px) {
-      header {
-        padding: 14px 18px;
-      }
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      nav {
-        flex-wrap: wrap;
-      }
-      .content {
-        padding: 22px 18px 30px;
-      }
-      .stream-title {
-        font-size: 22px;
-      }
-      .row-2 {
-        grid-template-columns: 1fr;
-      }
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <header>
-    <div class="header-inner">
-      <div class="logo">
-        <div class="logo-mark"></div>
-        <div>
-          <div class="logo-text-main">СайтСотика</div>
-          <div class="logo-text-sub">стрим · донаты · аукцион</div>
-        </div>
-      </div>
-      <nav>
-        <a href="#" class="nav-link">Главная</a>
-        <a href="#" class="nav-link">Аукцион</a>
-        <a href="#" class="nav-link active">Стрим</a>
-      </nav>
-    </div>
-  </header>
+<div class="panel">
+  <div class="status-icon">💸</div>
+  <div class="status-title">Перевод по кнопке</div>
+  <div class="status-text" id="amountText">Введите сумму</div>
 
-  <main class="content">
-    <div class="stream-header">
-      <div>
-        <div class="stream-title">Стрим‑панель донатов</div>
-        <div class="stream-sub">
-          Живой фид донатов, топы, цели и алерты — боевой экран СайтСотика для стрима.
-        </div>
-      </div>
-      <div class="stream-badge">
-        <span class="stream-badge-dot"></span>
-        Стрим онлайн · DonationAlerts
-      </div>
-    </div>
+  <input type="number" id="sumInput" placeholder="Сумма в ₽" min="1" max="100000">
 
-    <div class="grid">
-      <!-- Левая колонка -->
-      <div class="col">
-        <!-- Последние донаты -->
-        <section class="card">
-          <div class="card-inner">
-            <div class="card-header">
-              <div class="card-title">Последние донаты</div>
-              <div class="card-tag">live feed</div>
-            </div>
-            <div class="card-body">
-              <iframe
-                src="https://www.donationalerts.com/widget/lastdonations?token=W965bulACfZiXZ9rJUip"
-                height="520">
-              </iframe>
-            </div>
-          </div>
-        </section>
+  <button class="pay-btn" id="generateButton">Сформировать QR</button>
 
-        <!-- Полный список -->
-        <section class="card">
-          <div class="card-inner">
-            <div class="card-header">
-              <div class="card-title">Полный список донатов</div>
-              <div class="card-tag">history</div>
-            </div>
-            <div class="card-body">
-              <iframe
-                src="https://www.donationalerts.com/widget/donation-list?token=W965bulACfZiXZ9rJUip"
-                height="420">
-              </iframe>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- Правая колонка -->
-      <div class="col">
-        <div class="row-2">
-          <!-- Цель -->
-          <section class="card">
-            <div class="card-inner">
-              <div class="card-header">
-                <div class="card-title">Цель донатов</div>
-                <div class="card-tag">goal</div>
-              </div>
-              <div class="card-body">
-                <iframe
-                  src="https://www.donationalerts.com/widget/goal?token=W965bulACfZiXZ9rJUip"
-                  height="210">
-                </iframe>
-              </div>
-            </div>
-          </section>
-
-          <!-- Топ донатеров -->
-          <section class="card">
-            <div class="card-inner">
-              <div class="card-header">
-                <div class="card-title">Топ донатеров</div>
-                <div class="card-tag">top</div>
-              </div>
-              <div class="card-body">
-                <iframe
-                  src="https://www.donationalerts.com/widget/top?token=W965bulACfZiXZ9rJUip"
-                  height="210">
-                </iframe>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Алерты -->
-        <section class="card">
-          <div class="card-inner">
-            <div class="card-header">
-              <div class="card-title">Алерты стрима</div>
-              <div class="card-tag">alerts</div>
-            </div>
-            <div class="card-body">
-              <iframe
-                src="https://www.donationalerts.com/widget/alerts?token=W965bulACfZiXZ9rJUip"
-                height="260">
-              </iframe>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </main>
-
-  <footer>
-    СайтСотика · стрим‑панель донатов · DonationAlerts · {2026}
-  </footer>
-
+  <img src="" id="qrCode" class="donate-qr" style="display:none;">
+  <button class="pay-btn" id="payButton" style="display:none;">Оплатить</button>
 </div>
+
+<script>
+  const wallet = '4100117753597226';
+
+  const sumInput = document.getElementById('sumInput');
+  const amountText = document.getElementById('amountText');
+  const generateButton = document.getElementById('generateButton');
+  const payButton = document.getElementById('payButton');
+  const qrCode = document.getElementById('qrCode');
+
+  generateButton.onclick = () => {
+    const sum = parseInt(sumInput.value);
+
+    if (!sum || sum < 1) {
+      alert('Введите сумму');
+      return;
+    }
+
+    amountText.textContent = `${sum} ₽`;
+
+    const params = new URLSearchParams({
+      receiver: wallet,
+      sum: sum,
+      quickpay_form: 'shop',
+      targets: 'Поддержка проекта'
+    });
+
+    const paymentUrl = `https://yoomoney.ru/quickpay/confirm?${params.toString()}`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(paymentUrl)}`;
+
+    qrCode.src = qrUrl;
+    qrCode.style.display = 'block';
+    payButton.style.display = 'inline-block';
+
+    payButton.onclick = () => window.open(paymentUrl, '_blank');
+  };
+</script>
+
 </body>
 </html>
