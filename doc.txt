@@ -1,0 +1,79 @@
+# Online Driving Simulator Instructor - Educational Program
+
+## Instructor Information
+
+**Name:** Dmitry Peredniy
+**Role:** Online Driving Simulator Instructor
+**Website:** https://cotukob-code.github.io/siteodsotik/siteodsotik (GitHub Pages)
+
+## Educational Program Overview
+
+I teach online using a driving simulator. On my website I publish the structure of my lessons, educational materials and description of my training program. I use Canva to prepare visual materials, diagrams and explanations for my students.
+
+This is an educational course on a simulator, not a driving school. I do not issue licenses, replace driving schools, or process official documents. My goal is to give students practical understanding of driving in a safe digital environment, so they can consciously approach real-world driving or simply develop their sim-racing skills.
+
+## Teaching Format
+
+### Lesson Structure
+
+The training is built on a modular system:
+- Module 1: Introduction to the simulator and controls
+- Module 2: Basic trajectories and steering work
+- Module 3: Braking, acceleration, smoothness
+- Module 4: Lap stability and error analysis
+- Module 5: Advanced elements (by agreement)
+
+### Session Format
+
+- Duration: 45-60 minutes
+- Format: Online session with voice communication
+- Platform: Racing simulator (by agreement)
+- Feedback: Verbal comments, text notes when needed
+
+During sessions, I observe the student's driving, provide real-time commentary, and note moments that need improvement. After the session, I provide a brief analysis and recommendations for independent practice.
+
+## Lesson Examples
+
+### Lesson 1: Introduction to the Simulator and Controls
+**Objective:** Understand basic control logic, steering and pedal sensitivity, learn to move confidently on a straight line and enter simple turns.
+
+### Lesson 2: Trajectories and Steering Work
+**Objective:** Master basic trajectories, learn to enter turns correctly, select entry and exit points, work with the steering wheel without abrupt movements.
+
+### Lesson 3: Braking and Acceleration
+**Objective:** Learn to brake and accelerate smoothly, understand how traction is distributed, and why abrupt movements make the car unstable.
+
+### Lesson 4: Lap Stability
+**Objective:** Complete several consecutive laps without major errors, maintain rhythm, control attention, and not "break down" after a single inaccuracy.
+
+### Lesson 5: Error Analysis and Development
+**Objective:** Analyze session recordings (if available), identify recurring errors, create a plan for further practice and skill development.
+
+## Target Audience
+
+The training format is suitable for those who:
+- Want to safely learn driving through a simulator
+- Are interested in racing and want to understand how drivers work
+- Already drive but want to improve car feel and trajectories in a gaming environment
+- Use simulators as a training tool
+
+## Educational Approach
+
+I work with racing simulators and use them as a safe platform for teaching basic and advanced driving skills. During lessons, we analyze not only "how to drive fast" but also how car control, attention, error management, and trajectory understanding develop.
+
+The simulator provides a training environment where mistakes can be made, analyzed, and progress achieved without risk to life or vehicle.
+
+## Contact Information
+
+To contact me:
+- Send a message via a convenient messenger or email
+- Briefly describe your experience and lesson goals
+
+Example message:
+"Hello, my name is [Name]. I want to practice driving on a simulator. Experience level: [beginner / experienced]. Goal: [learn basics / improve trajectories / prepare for real driving]."
+
+This website serves as my educational platform where I publish:
+- Description of my training program
+- Lesson structure and example topics
+- Feedback format and analysis
+- Contact information for communication and lesson booking

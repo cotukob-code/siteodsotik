@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Driving Simulator Training - Official Documentation</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;600&display=swap');
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #f8f9fa;
+        }
+        
+        .document-container {
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a5276, #2980b9);
+            color: white;
+            padding: 40px 50px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid white;
+        }
+        
+        .title {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+        
+        .document-id {
+            font-size: 14px;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 30px;
+            margin-top: 15px;
+        }
+        
+        .content {
+            padding: 70px 50px 50px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            color: #1a5276;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2980b9;
+            display: inline-block;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .info-item {
+            background: #f1f6f9;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #2980b9;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #1a5276;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .info-value {
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .program-description {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .canva-section {
+            background: #e8f4f8;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #00b894;
+        }
+        
+        .signature-area {
+            margin-top: 50px;
+            text-align: right;
+        }
+        
+        .signature-line {
+            width: 300px;
+            height: 1px;
+            background: #333;
+            margin: 40px 0 10px;
+            display: inline-block;
+        }
+        
+        .signature-name {
+            font-weight: 600;
+            color: #1a5276;
+        }
+        
+        .signature-title {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .official-seal {
+            position: absolute;
+            top: 60px;
+            right: 60px;
+            width: 120px;
+            height: 120px;
+            border: 3px solid #2980b9;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transform: rotate(15deg);
+        }
+        
+        .seal-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: #2980b9;
+            line-height: 1.2;
+        }
+        
+        .verification {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            color: #777;
+            font-size: 13px;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+                padding: 0;
+            }
+            
+            .document-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="document-container">
+        <div class="header">
+            <h1 class="title">Online Driving Simulator Training</h1>
+            <p class="subtitle">Official Educational Institution Documentation</p>
+            <div class="document-id">Document ID: ODST-CFE-20260511</div>
+            
+            <div class="official-seal">
+                <div class="seal-text">OFFICIAL<br>DOCUMENT</div>
+                <div class="seal-text" style="margin-top: 10px; font-size: 10px;">VERIFIED</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">Instructor Information</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Full Name</div>
+                        <div class="info-value">Dmitry Peredniy</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Position</div>
+                        <div class="info-value">Lead Instructor</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Website</div>
+                        <div class="info-value">https://cotukob-code.github.io</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Educational Institution</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Institution Name</div>
+                        <div class="info-value">Online Driving Simulator Training — Dmitry Peredniy</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Institution Type</div>
+                        <div class="info-value">Private Online Educational Institution</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Location</div>
+                        <div class="info-value">New York, NY, USA</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Educational Program</h2>
+                <div class="program-description">
+                    <p><strong>Program Name:</strong> Professional Driving Skills Development Program</p>
+                    <p><strong>Program Overview:</strong> A comprehensive modular curriculum designed to develop professional driving skills through advanced simulation technology. The program focuses on vehicle dynamics, racing lines, braking techniques, and performance driving principles in a safe, controlled environment.</p>
+                    
+                    <p><strong>Teaching Methodology:</strong> Real-time online instruction with personalized feedback, video analysis, and structured learning progression from beginner to advanced levels.</p>
+                    
+                    <p><strong>Program Structure:</strong></p>
+                    <ul>
+                        <li><strong>Module 1:</strong> Fundamentals of Vehicle Control</li>
+                        <li><strong>Module 2:</strong> Racing Lines and Cornering Techniques</li>
+                        <li><strong>Module 3:</strong> Braking and Acceleration Dynamics</li>
+                        <li><strong>Module 4:</strong> Lap Consistency and Racecraft</li>
+                        <li><strong>Module 5:</strong> Advanced Performance Driving</li>
+                    </ul>
+                    
+                    <p><strong>Session Format:</strong> 45-60 minute online sessions with live instruction, video recording analysis, and personalized development plans.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">Canva for Education Usage</h2>
+                <div class="canva-section">
+                    <p><strong>Purpose:</strong> Creation of professional educational materials for students</p>
+                    
+                    <p><strong>Materials Created:</strong></p>
+                    <ul>
+                        <li>Visual explanations of driving techniques</li>
+                        <li>Diagrams of racing lines and cornering</li>
+                        <li>Lesson presentations and summaries</li>
+                        <li>Performance analysis reports</li>
+                        <li>Training program documentation</li>
+                    </ul>
+                    
+                    <p><strong>Platform:</strong> Canva Pro for Education</p>
+                    
+                    <p><strong>Justification:</strong> Canva is an essential tool for creating professional, visually engaging educational content that enhances student understanding of complex driving concepts. The visual materials created with Canva are integral to the teaching methodology and student success.</p>
+                </div>
+            </div>
+            
+            <div class="signature-area">
+                <div class="signature-line"></div>
+                <div class="signature-name">Dmitry Peredniy</div>
+                <div class="signature-title">Lead Instructor, Online Driving Simulator Training</div>
+                <div class="signature-title">Date: May 11, 2026</div>
+            </div>
+            
+            <div class="verification">
+                <p>This document certifies the educational activities of Online Driving Simulator Training — Dmitry Peredniy as an official educational institution providing professional driving instruction through simulation technology. The institution uses Canva for Education to create visual teaching materials for students. This certificate is valid for the purpose of Canva for Education application and verification.</p>
+                <p style="margin-top: 10px;">Verification Code: ODST-CFE-20260511 | Document generated on May 11, 2026</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,2 +1,58 @@
-/* Стили уже включены в index.html через внутренний тег <style> */
-/* Этот файл не используется, так как стили встроены в HTML */
+/* УСИЛЕННЫЕ ГИГАНТСКИЕ ОКНА */
+.hub-column {
+  position: relative;
+  flex: 1 1 33.333%;
+  height: calc(100vh - 70px);
+  border-radius: 32px; /* было 24px */
+  overflow: hidden;
+  cursor: pointer;
+  transform-origin: center center;
+  transition:
+    transform 0.35s ease-out,
+    box-shadow 0.35s ease-out,
+    flex-basis 0.35s ease-out,
+    border-color 0.35s ease-out,
+    background 0.35s ease-out,
+    filter 0.35s ease-out;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(circle at 0 0, rgba(255,255,255,0.08) 0, transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(255,153,0,0.18) 0, transparent 55%),
+    var(--glass-strong);
+  border: 2px solid rgba(255,153,0,0.25); /* усиленная рамка */
+  box-shadow:
+    0 0 40px rgba(0,0,0,0.95),
+    0 0 80px rgba(0,0,0,0.95),
+    inset 0 0 40px rgba(255,153,0,0.15); /* внутренний неон */
+  backdrop-filter: blur(22px);
+}
+
+/* ПАРАЛЛАКС */
+.hub-column:hover {
+  transform: translateY(-6px) scale(1.02);
+  filter: brightness(1.15) saturate(1.2);
+  box-shadow:
+    0 0 60px rgba(0,0,0,1),
+    0 0 120px rgba(0,0,0,1),
+    inset 0 0 60px rgba(255,153,0,0.25);
+  border-color: rgba(255,153,0,0.6);
+}
+
+/* МАГНИТНЫЙ ЭФФЕКТ */
+.hub-column:hover .hub-column-main-ghost {
+  transform: scale(1.08);
+  transition: transform 0.4s ease-out;
+}
+
+/* ГЛУБОКИЙ 3D ФОН */
+.hub-column-main-ghost {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: blur(6px) saturate(1.3);
+  opacity: 0.55;
+  transform: scale(1.02);
+  transition: transform 0.4s ease-out;
+}

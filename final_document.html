@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Official Training Document</title>
+
+<style>
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    /* ГЛАВНОЕ: запрет Edge ломать цвета */
+    body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    html, body {
+        margin: 0;
+        padding: 0;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
+        font-family: "Times New Roman", serif;
+        background: #d4d7dd;
+    }
+
+    .page {
+        width: 210mm;
+        height: 297mm;
+        background: linear-gradient(135deg, #fdfcfb, #e2e2e2);
+        padding: 20mm;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* HEADER */
+    .header {
+        text-align: center;
+        margin-bottom: 10mm;
+    }
+
+    .header-title {
+        font-size: 26px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #0f172a;
+    }
+
+    .header-sub {
+        font-size: 13px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #4b5563;
+    }
+
+    .header-line {
+        width: 90mm;
+        height: 3px;
+        background: linear-gradient(to right, #1e3a8a, #d4af37, #1e3a8a);
+        margin: 8px auto 0 auto;
+        border-radius: 2px;
+    }
+
+    /* MAIN LAYOUT */
+    .main {
+        display: flex;
+        flex: 1;
+        gap: 8mm;
+    }
+
+    /* LEFT BLOCK */
+    .left {
+        width: 55mm;
+        background: linear-gradient(180deg, #1e3a8a, #3b82f6);
+        color: white;
+        padding: 8mm;
+        border-radius: 6px;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .left-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 4mm;
+        text-transform: uppercase;
+    }
+
+    /* RIGHT BLOCK */
+    .right {
+        flex: 1;
+        background: #ffffffd9;
+        padding: 10mm;
+        border-radius: 6px;
+        font-size: 13.5px;
+        line-height: 1.7;
+        color: #111827;
+    }
+
+    .section-title {
+        font-size: 14px;
+        font-weight: bold;
+        color: #1e3a8a;
+        margin-bottom: 2mm;
+        text-transform: uppercase;
+    }
+
+    .section-line {
+        width: 30mm;
+        height: 2px;
+        background: linear-gradient(to right, #d4af37, #1e3a8a);
+        margin-bottom: 4mm;
+        border-radius: 2px;
+    }
+
+    /* FOOTER */
+    .footer {
+        margin-top: 10mm;
+        text-align: right;
+        font-size: 13px;
+    }
+
+    .signature-line {
+        width: 60mm;
+        border-top: 1px solid #111827;
+        margin: 6mm 0 2mm auto;
+    }
+
+    /* ПЕЧАТЬ */
+    @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;
+            overflow: hidden;
+        }
+        .page {
+            box-shadow: none;
+        }
+    }
+</style>
+</head>
+
+<body>
+<div class="page">
+
+    <div class="header">
+        <div class="header-title">Online Driving Simulator Training</div>
+        <div class="header-sub">Official Documentation</div>
+        <div class="header-line"></div>
+    </div>
+
+    <div class="main">
+
+        <div class="left">
+            <div class="left-title">Instructor</div>
+            <b>Name:</b> Dmitry Peredniy<br><br>
+            <b>Position:</b> Lead Instructor<br><br>
+            <b>Website:</b> cotukob-code.github.io<br><br>
+
+            <div class="left-title">Institution</div>
+            <b>Name:</b> Online Driving Simulator Training<br><br>
+            <b>Type:</b> Private Online Institution<br><br>
+            <b>Location:</b> New York, USA
+        </div>
+
+        <div class="right">
+            <div class="section-title">Program Overview</div>
+            <div class="section-line"></div>
+            A comprehensive modular curriculum designed to develop professional driving skills through simulation technology.
+
+            <br><br>
+
+            <div class="section-title">Program Structure</div>
+            <div class="section-line"></div>
+            • Fundamentals of Vehicle Control<br>
+            • Racing Lines and Cornering Techniques<br>
+            • Braking and Acceleration Dynamics<br>
+            • Lap Consistency and Racecraft<br>
+            • Advanced Performance Driving
+
+            <br><br>
+
+            <div class="section-title">Canva for Education</div>
+            <div class="section-line"></div>
+            Canva is used to create professional educational materials essential for student learning.
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <div class="signature-line"></div>
+        Dmitry Peredniy, Lead Instructor
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GigaCodeAgentSettings">
+    <option name="autoApprovedCommands">
+      <list>
+        <Execute>
+          <option name="pattern" value="mkdir &quot;C:\laragon\www\siteodsotik\public&quot; &amp;&amp; mkdir &quot;C:\laragon\www\siteodsotik\public\css&quot; &amp;&amp; mkdir &quot;C:\laragon\www\siteodsotik\public\js&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="mkdir &quot;C:\laragon\www\siteodsotik\public&quot;; mkdir &quot;C:\laragon\www\siteodsotik\public\css&quot;; mkdir &quot;C:\laragon\www\siteodsotik\public\js&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="mv &quot;C:/laragon/www/siteodsotik/pages/siteofsotik/index.html&quot; &quot;C:/laragon/www/siteodsotik/public/index.html&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="ls &quot;C:/laragon/www/siteodsotik/public/&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="Get-Content &quot;C:/laragon/www/siteodsotik/public/index.html&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="rm -rf &quot;C:\laragon\www\siteodsotik\public&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="Remove-Item -Recurse -Force &quot;C:\laragon\www\siteodsotik\public&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="mkdir &quot;C:\laragon\www\siteodsotik\pages\siteofsotik&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="mv &quot;C:/laragon/www/siteodsotik/public/index.html&quot; &quot;C:/laragon/www/siteodsotik/pages/siteofsotik/index.html&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="mkdir &quot;C:\laragon\www\siteodsotik\sitesotik3w\stream&quot;" />
+        </Execute>
+        <Execute>
+          <option name="pattern" value="mkdir &quot;C:\laragon\www\siteodsotik\sitesotik3w\main&quot;" />
+        </Execute>
+      </list>
+    </option>
+  </component>
+</project>

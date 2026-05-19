@@ -1,733 +1,910 @@
-<!-- TEMPORARY RENAME TO DEBUG DEPLOYMENT ISSUES -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Дмитрий Передний — Преподаватель вождения на симуляторе</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Обучение вождению на гоночном симуляторе. Уроки, разборы, методика, подготовка к реальному вождению.">
-  <style>
-    :root {
-      --bg: #05060a;
-      --bg-alt: #0c0f18;
-      --accent: #ff3b3b;
-      --accent-soft: #ff7a3b;
-      --text: #f5f5f5;
-      --muted: #a0a4b8;
-      --card: #111522;
-      --border: #22283a;
-      --radius: 10px;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #151a2b 0, #05060a 55%);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    a {
-      color: var(--accent-soft);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    header {
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(90deg, rgba(255,59,59,0.12), transparent);
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-    }
-    .nav {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      font-size: 13px;
-      color: var(--muted);
-    }
-    .logo-mark {
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, #ffffff 0, #ff3b3b 35%, #ff7a3b 70%, #05060a 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 18px rgba(255,59,59,0.6);
-      position: relative;
-      overflow: hidden;
-    }
-    .logo-mark::after {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border-radius: inherit;
-      border: 1px solid rgba(0,0,0,0.45);
-    }
-    .logo-mark span {
-      font-size: 13px;
-      font-weight: 800;
-      color: #fff;
-    }
-    .nav-links {
-      display: flex;
-      gap: 18px;
-      font-size: 14px;
-    }
-    .nav-links a {
-      color: var(--muted);
-      position: relative;
-      padding-bottom: 2px;
-    }
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-soft));
-      transition: width 0.18s ease-out;
-    }
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    .nav-cta {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .btn {
-      border-radius: 999px;
-      padding: 7px 16px;
-      font-size: 13px;
-      border: 1px solid var(--border);
-      background: rgba(5,6,10,0.7);
-      color: var(--muted);
-      cursor: pointer;
-      transition: background 0.18s ease-out, border-color 0.18s ease-out, transform 0.08s ease-out;
-    }
-    .btn:hover {
-      background: rgba(15,18,30,0.95);
-      border-color: rgba(255,255,255,0.08);
-      transform: translateY(-1px);
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-soft));
-      color: #fff;
-      border-color: transparent;
-      box-shadow: 0 0 18px rgba(255,59,59,0.55);
-    }
-    .btn-primary:hover {
-      box-shadow: 0 0 26px rgba(255,59,59,0.8);
-    }
-    .menu-toggle {
-      display: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: rgba(5,6,10,0.9);
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    .menu-toggle span {
-      width: 16px;
-      height: 2px;
-      background: var(--muted);
-      position: relative;
-    }
-    .menu-toggle span::before,
-    .menu-toggle span::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 16px;
-      height: 2px;
-      background: var(--muted);
-    }
-    .menu-toggle span::before {
-      top: -5px;
-    }
-    .menu-toggle span::after {
-      top: 5px;
-    }
-    main {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 26px 18px 60px;
-    }
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 32px;
-      align-items: center;
-      padding: 26px 0 34px;
-    }
-    .hero-title {
-      font-size: 32px;
-      line-height: 1.15;
-      margin-bottom: 10px;
-    }
-    .hero-title span {
-      background: linear-gradient(120deg, #ffffff, #ffb3b3);
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-    .hero-sub {
-      font-size: 15px;
-      color: var(--muted);
-      margin-bottom: 18px;
-      max-width: 520px;
-    }
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-    .tag {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: radial-gradient(circle at top left, rgba(255,59,59,0.35), rgba(5,6,10,0.9));
-      color: #fbe9e9;
-    }
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    .hero-note {
-      font-size: 12px;
-      color: var(--muted);
-    }
-    .hero-note strong {
-      color: #fff;
-      font-weight: 600;
-    }
-    .hero-card {
+  <meta charset="UTF-8" />
+  <title>Хаб — СайтСотика · Донат · АукционСотика</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- ... остальной код head без изменений ... -->
+<style>
+  :root {
+    --bg: #02030a;
+    --bg2: #050616;
+    --card: #0b0c18;
+    --card2: #111222;
+    --accent: #ff9900;
+    --accent2: #ff4b00;
+    --accent3: #ffdd99;
+    --border: #262637;
+    --border2: #2f2f45;
+    --text: #f5f5f5;
+    --muted: #9a9ab5;
+    --danger: #ff3366;
+    --ok: #3bd16f;
+    --shadow-strong: 0 0 40px rgba(0,0,0,0.95);
+    --glass: rgba(10,10,25,0.82);
+    --glass-strong: rgba(10,10,25,0.96);
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 0 0, #26264a 0, transparent 55%),
+      radial-gradient(circle at 100% 0, #3a1f3f 0, transparent 55%),
+      radial-gradient(circle at 50% 100%, #1b2b3f 0, transparent 60%),
+      var(--bg);
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  .root-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .bg-orbit {
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(circle at 0 0, rgba(255,255,255,0.08) 0, transparent 55%),
+      radial-gradient(circle at 100% 0, rgba(255,153,0,0.18) 0, transparent 55%),
+      radial-gradient(circle at 0 100%, rgba(0,180,255,0.18) 0, transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(255,75,0,0.18) 0, transparent 55%);
+    opacity: 0.7;
+    filter: blur(4px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orbitPulse 18s ease-in-out infinite alternate;
+  }
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    opacity: 0.4;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+    animation: gridDrift 40s linear infinite;
+  }
+
+  .bg-lines {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(120deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(-120deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 220px 220px;
+    opacity: 0.25;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+    animation: linesDrift 60s linear infinite;
+  }
+
+  .hub-frame {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    padding: 10px 18px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hub-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(10,10,25,0.96), rgba(5,5,15,0.96));
+    border: 1px solid rgba(70,70,120,0.9);
+    box-shadow:
+      0 0 22px rgba(0,0,0,0.9),
+      0 0 40px rgba(0,0,0,0.9);
+    backdrop-filter: blur(18px);
+    flex-shrink: 0;
+  }
+
+  .hub-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hub-logo-mark-wrap {
+    position: relative;
+    width: 40px;
+    height: 40px;
+  }
+
+  .hub-logo-mark-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.9) 0, rgba(255,153,0,0.5) 30%, transparent 70%);
+    opacity: 0.9;
+    filter: blur(6px);
+    animation: logoGlow 4s ease-in-out infinite alternate;
+  }
+
+  .hub-logo-mark {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 16px;
+    background:
+      radial-gradient(circle at 30% 20%, #ffffff 0, #ffdd99 20%, #ff9900 40%, #ff4b00 80%);
+    box-shadow:
+      0 0 18px rgba(255,153,0,0.9),
+      0 0 32px rgba(255,75,0,0.7);
+    overflow: hidden;
+  }
+
+  .hub-logo-mark-inner {
+    position: absolute;
+    inset: 6px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.4);
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,255,255,0.4) 0, transparent 55%),
+      linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.1));
+  }
+
+  .hub-logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hub-logo-main {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .hub-logo-sub {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .hub-header-center {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent3);
+    text-align: center;
+    flex: 1;
+  }
+
+  .hub-header-meta {
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-end;
+  }
+
+  .hub-header-pill-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .hub-header-pill {
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(80,80,120,0.9);
+  }
+
+  .hub-header-pill-ok {
+    border-color: rgba(59,209,111,0.9);
+    color: #b9ffd1;
+  }
+
+  .hub-header-pill-danger {
+    border-color: rgba(255,51,102,0.9);
+    color: #ffc0d4;
+  }
+
+  .hub-main {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 10px;
+    padding: 2px 0 0;
+  }
+
+  /* === ОБНОВЛЁННЫЕ СТИЛИ КОЛОНОК — УСИЛЕННЫЕ ГИГАНТСКИЕ ОКНА === */
+  .hub-column {
+    position: relative;
+    flex: 1 1 33.333%;
+    height: calc(100vh - 70px);
+    border-radius: 32px;
+    overflow: hidden;
+    cursor: pointer;
+    transform-origin: center center;
+    transition:
+      transform 0.35s ease-out,
+      box-shadow 0.35s ease-out,
+      flex-basis 0.35s ease-out,
+      border-color 0.35s ease-out,
+      background 0.35s ease-out,
+      filter 0.35s ease-out;
+    display: flex;
+    flex-direction: column;
+    background:
+      radial-gradient(circle at 0 0, rgba(255,255,255,0.08) 0, transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(255,153,0,0.18) 0, transparent 55%),
+      var(--glass-strong);
+    border: 2px solid rgba(255,153,0,0.25);
+    box-shadow:
+      0 0 40px rgba(0,0,0,0.95),
+      0 0 80px rgba(0,0,0,0.95),
+      inset 0 0 40px rgba(255,153,0,0.15);
+    backdrop-filter: blur(22px);
+  }
+
+  .hub-column:hover {
+    transform: translateY(-6px) scale(1.02);
+    filter: brightness(1.15) saturate(1.2);
+    box-shadow:
+      0 0 60px rgba(0,0,0,1),
+      0 0 120px rgba(0,0,0,1),
+      inset 0 0 60px rgba(255,153,0,0.25);
+    border-color: rgba(255,153,0,0.6);
+  }
+
+  .hub-column-main-ghost {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: blur(6px) saturate(1.3);
+    opacity: 0.55;
+    transform: scale(1.02);
+    transition: transform 0.4s ease-out;
+  }
+
+  .hub-column:hover .hub-column-main-ghost {
+    transform: scale(1.08);
+    transition: transform 0.4s ease-out;
+  }
+
+  /* === ОСТАЛЬНЫЕ СТИЛИ (без изменений) === */
+  .hub-column::before {
+    content: "";
+    position: absolute;
+    inset: -40%;
+    background:
+      radial-gradient(circle at 0 0, rgba(255,255,255,0.08) 0, transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(255,75,0,0.16) 0, transparent 55%);
+    opacity: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
+  }
+
+  .hub-column:hover::before {
+    opacity: 1;
+    transform: translate3d(-10px,10px,0);
+  }
+
+  .hub-column-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 14px 14px 12px;
+    gap: 10px;
+  }
+
+  .hub-column-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-transform: uppercase;
+  }
+
+  .hub-column-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+  }
+
+  .hub-column-title {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    color: var(--accent3);
+  }
+
+  .hub-column-footer {
+    margin-top: auto;
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    opacity: 0.9;
+  }
+
+  .hub-column-tag {
+    padding: 3px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(80,80,120,0.9);
+    font-size: 9px;
+  }
+
+  .hub-column-main {
+    flex: 1;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 6px;
+    background: radial-gradient(circle at 50% 0, rgba(255,255,255,0.08) 0, transparent 55%), #000;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.9);
+  }
+
+  .hub-column-main::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.5) 0, transparent 30%, transparent 70%, rgba(0,0,0,0.7) 100%);
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  .hub-column-overlay-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hub-column-overlay-label-inner {
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(0,0,0,0.6);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #f5f5f5;
+    box-shadow: 0 0 18px rgba(0,0,0,0.9);
+  }
+
+  .hub-column-main-ghost.site {
+    background-image: linear-gradient(135deg, #0a0f2a, #1a2340);
+  }
+
+  .hub-column-main-ghost.donate {
+    background-image: linear-gradient(135deg, #2a0a0a, #401a1a);
+  }
+
+  .hub-column-main-ghost.auction {
+    background-image: linear-gradient(135deg, #0a2a1a, #1a4030);
+  }
+
+  .hub-footer {
+    font-size: 9px;
+    color: var(--muted);
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    padding: 0 2px 2px;
+    flex-shrink: 0;
+  }
+
+  .hub-window-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: none;
+    align-items: stretch;
+    justify-content: stretch;
+    background:
+      radial-gradient(circle at 0 0, rgba(255,255,255,0.08) 0, transparent 55%),
+      rgba(0,0,0,0.94);
+    backdrop-filter: blur(18px);
+  }
+
+  .hub-window-layer.visible {
+    display: flex;
+  }
+
+  .hub-window-shell {
+    position: relative;
+    flex: 1;
+    margin: 10px 18px 14px;
+    border-radius: 24px;
+    border: 1px solid rgba(80,80,120,0.9);
+    background:
+      radial-gradient(circle at 0 0, rgba(255,255,255,0.06) 0, transparent 55%),
+      radial-gradient(circle at 100% 100%, rgba(255,153,0,0.12) 0, transparent 55%),
+      var(--card2);
+    box-shadow:
+      0 0 26px rgba(0,0,0,0.95),
+      0 0 60px rgba(0,0,0,0.95);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hub-window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(70,70,120,0.9);
+    background: linear-gradient(135deg, rgba(10,10,25,0.96), rgba(5,5,15,0.96));
+  }
+
+  .hub-window-title-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hub-window-kicker {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+
+  .hub-window-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent3);
+  }
+
+  .hub-window-meta {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  .hub-window-close {
+    border-radius: 999px;
+    border: 1px solid rgba(255,51,102,0.9);
+    background:
+      radial-gradient(circle at 0 0, rgba(255,255,255,0.12) 0, transparent 55%),
+      rgba(40,0,20,0.96);
+    color: #ffd0df;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    padding: 6px 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow:
+      0 0 18px rgba(255,51,102,0.9),
+      0 0 32px rgba(255,0,80,0.7);
+    transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+  }
+
+  .hub-window-close:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 0 22px rgba(255,51,102,1),
+      0 0 40px rgba(255,0,80,0.9);
+  }
+
+  .hub-window-body {
+    flex: 1;
+    position: relative;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hub-window-iframe-wrap {
+    position: relative;
+    flex: 1;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .hub-window-iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #000;
+  }
+
+  .hub-window-footer {
+    padding: 8px 12px 9px;
+    border-top: 1px solid rgba(70,70,120,0.9);
+    background: rgba(5,5,15,0.96);
+    font-size: 10px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  @media (max-width: 1024px) {
+    .hub-header {
       border-radius: 18px;
-      background: radial-gradient(circle at top, #1b2135 0, #05060a 55%);
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 16px 16px 14px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
     }
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 10% 0, rgba(255,59,59,0.35), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
+    .hub-column {
+      height: calc(100vh - 80px);
     }
-    .hero-card-inner {
-      position: relative;
-      z-index: 1;
+  }
+
+  @media (max-width: 840px) {
+    .hub-frame {
+      padding: 8px 10px 10px;
     }
-    .hero-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
+    .hub-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .hero-card-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
+    .hub-header-center {
+      text-align: left;
     }
-    .hero-card-status {
-      font-size: 11px;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(5,6,10,0.7);
-      border: 1px solid rgba(255,255,255,0.08);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--muted);
+    .hub-header-meta {
+      align-items: flex-start;
     }
-    .hero-card-status-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: #3bff7a;
-      box-shadow: 0 0 10px rgba(59,255,122,0.8);
+    .hub-main {
+      flex-direction: column;
     }
-    .hero-track {
-      margin-top: 6px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 0 0, rgba(255,255,255,0.06), rgba(0,0,0,0.9));
-      border: 1px solid rgba(255,255,255,0.06);
-      padding: 10px 10px 9px;
-      position: relative;
-      overflow: hidden;
+    .hub-column {
+      height: calc((100vh - 120px) / 3);
     }
-    .hero-track-lane {
-      height: 3px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      position: relative;
-      overflow: hidden;
+    .hub-window-shell {
+      margin: 8px 10px 10px;
+      border-radius: 18px;
     }
-    .hero-track-car {
-      position: absolute;
-      top: -6px;
-      left: 18%;
-      width: 22px;
-      height: 12px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ff3b3b, #ffb33b);
-      box-shadow: 0 0 16px rgba(255,59,59,0.9);
-      transform: skewX(-12deg);
+  }
+
+  @media (max-width: 520px) {
+    .hub-window-header {
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .hero-track-car::after {
-      content: "";
-      position: absolute;
-      inset: 3px 4px;
-      border-radius: inherit;
-      border: 1px solid rgba(0,0,0,0.6);
+    .hub-window-footer {
+      flex-direction: column;
+      align-items: flex-start;
     }
-    .hero-track-meta {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 8px;
-      font-size: 11px;
-      color: var(--muted);
+  }
+
+  @keyframes orbitPulse {
+    0% {
+      transform: translate3d(0,0,0) scale(1);
+      opacity: 0.6;
     }
-    .hero-track-meta strong {
-      color: #fff;
-      font-weight: 600;
+    50% {
+      transform: translate3d(-10px,10px,0) scale(1.05);
+      opacity: 0.8;
     }
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 8px;
-      margin-top: 10px;
-      font-size: 11px;
+    100% {
+      transform: translate3d(10px,-10px,0) scale(1.08);
+      opacity: 0.7;
     }
-    .metric {
-      padding: 7px 8px;
-      border-radius: 10px;
-      background: rgba(5,6,10,0.8);
-      border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  @keyframes gridDrift {
+    0% {
+      transform: translate3d(0,0,0);
     }
-    .metric-label {
-      color: var(--muted);
-      margin-bottom: 2px;
+    100% {
+      transform: translate3d(-40px,-40px,0);
     }
-    .metric-value {
-      font-weight: 600;
-      color: #fff;
+  }
+
+  @keyframes linesDrift {
+    0% {
+      transform: translate3d(0,0,0);
     }
-    section {
-      margin-top: 34px;
+    100% {
+      transform: translate3d(80px,40px,0);
     }
-    .section-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--muted);
-      margin-bottom: 6px;
+  }
+
+  @keyframes logoGlow {
+    0% {
+      opacity: 0.7;
+      transform: scale(1);
     }
-    .section-title {
-      font-size: 20px;
-      margin-bottom: 10px;
+    100% {
+      opacity: 1;
+      transform: scale(1.08);
     }
-    .section-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1.4fr) minmax(0,1.1fr);
-      gap: 22px;
-    }
-    .card {
-      border-radius: 14px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      padding: 14px 14px 12px;
-    }
-    .card h3 {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-    .card p {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 8px;
-    }
-    .list {
-      list-style: none;
-      font-size: 14px;
-      color: var(--muted);
-    }
-    .list li {
-      padding-left: 16px;
-      position: relative;
-      margin-bottom: 4px;
-    }
-    .list li::before {
-      content: "•";
-      position: absolute;
-      left: 2px;
-      color: var(--accent-soft);
-    }
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
-    }
-    .pill {
-      font-size: 11px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.08);
-      color: var(--muted);
-      background: rgba(5,6,10,0.8);
-    }
-    .lessons-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 4px;
-    }
-    .lesson {
-      padding: 8px 9px;
-      border-radius: 10px;
-      background: rgba(5,6,10,0.9);
-      border: 1px solid rgba(255,255,255,0.06);
-      font-size: 13px;
-    }
-    .lesson-title {
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .lesson-meta {
-      font-size: 11px;
-      color: var(--muted);
-    }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: minmax(0,1.2fr) minmax(0,1fr);
-      gap: 22px;
-    }
-    .contact-item {
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .contact-item strong {
-      color: #fff;
-      font-weight: 600;
-    }
-    .contact-note {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 6px;
-    }
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 14px 18px 20px;
-      font-size: 12px;
-      color: var(--muted);
-      text-align: center;
-      background: #05060a;
-    }
-    @media (max-width: 840px) {
-      .hero {
-        grid-template-columns: minmax(0,1fr);
-      }
-      .hero-card {
-        order: -1;
-      }
-      .section-grid,
-      .contact-grid {
-        grid-template-columns: minmax(0,1fr);
-      }
-    }
-    @media (max-width: 720px) {
-      .nav-links,
-      .nav-cta {
-        display: none;
-      }
-      .menu-toggle {
-        display: inline-flex;
-      }
-      main {
-        padding-inline: 14px;
-      }
-      .hero {
-        padding-top: 18px;
-      }
-    }
-  </style>
+  }
+</style>
+<!-- ... дальше идёт <body> без изменений ... -->
 </head>
 <body>
-  <header>
-    <div class="nav">
-      <div class="logo">
-        <div class="logo-mark"><span>DP</span></div>
-        <span>Sim Racing Instructor</span>
+
+<div class="root-shell">
+  <div class="bg-orbit"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-lines"></div>
+
+  <div class="hub-frame">
+    <header class="hub-header">
+      <div class="hub-logo">
+        <div class="hub-logo-mark-wrap">
+          <div class="hub-logo-mark-glow"></div>
+          <div class="hub-logo-mark">
+            <div class="hub-logo-mark-inner"></div>
+          </div>
+        </div>
+        <div class="hub-logo-text">
+          <div class="hub-logo-main">СайтСотика</div>
+          <div class="hub-logo-sub">хаб · сайт · донат · аукционсотика</div>
+        </div>
       </div>
-      <nav class="nav-links">
-        <a href="#about">О преподавателе</a>
-        <a href="#program">Программа</a>
-        <a href="#lessons">Уроки</a>
-        <a href="#contact">Контакты</a>
-      </nav>
-      <div class="nav-cta">
-        <button class="btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Задать вопрос</button>
-        <button class="btn btn-primary" onclick="document.getElementById('lessons').scrollIntoView({behavior:'smooth'})">Записаться на урок</button>
-        <button class="menu-toggle" aria-label="Меню"><span></span></button>
+
+      <div class="hub-header-center">
+        3 гигантских окна · один файл · fullscreen overlay
       </div>
+
+      <div class="hub-header-meta">
+        <div class="hub-header-pill-row">
+          <div class="hub-header-pill hub-header-pill-ok">чистый html/css/js</div>
+          <div class="hub-header-pill hub-header-pill-ok">готов к vercel</div>
+        </div>
+        <div class="hub-header-pill-row">
+          <div class="hub-header-pill hub-header-pill-danger">без виджетов</div>
+          <div class="hub-header-pill hub-header-pill-danger">без api с фронта</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="hub-main">
+      <!-- КОЛОНКА 1: САЙТСОТИКА -->
+      <section class="hub-column" data-open-window="site">
+        <div class="hub-column-inner">
+          <header class="hub-column-header">
+            <div class="hub-column-label">окно 1</div>
+            <div class="hub-column-title">сайтсотика — стрим</div>
+          </header>
+          <div class="hub-column-main">
+            <div class="hub-column-main-ghost site"></div>
+            <div class="hub-column-overlay-label">
+              <div class="hub-column-overlay-label-inner">
+                открыть сайтсотика в полноэкранном режиме
+              </div>
+            </div>
+          </div>
+          <footer class="hub-column-footer">
+            <span class="hub-column-tag">основной сайт</span>
+            <span>машины · трассы · стрим</span>
+          </footer>
+        </div>
+      </section>
+
+      <!-- КОЛОНКА 2: ДОНАТ -->
+      <section class="hub-column" data-open-window="donate">
+        <div class="hub-column-inner">
+          <header class="hub-column-header">
+            <div class="hub-column-label">окно 2</div>
+            <div class="hub-column-title">донаты — api donationalerts</div>
+          </header>
+          <div class="hub-column-main">
+            <div class="hub-column-main-ghost donate"></div>
+            <div class="hub-column-overlay-label">
+              <div class="hub-column-overlay-label-inner">
+                открыть донаты в полноэкранном режиме
+              </div>
+            </div>
+          </div>
+          <footer class="hub-column-footer">
+            <span class="hub-column-tag">донат</span>
+            <span>логика на бэке · без cors</span>
+          </footer>
+        </div>
+      </section>
+
+      <!-- КОЛОНКА 3: АУКЦИОН -->
+      <section class="hub-column" data-open-window="auction">
+        <div class="hub-column-inner">
+          <header class="hub-column-header">
+            <div class="hub-column-label">окно 3</div>
+            <div class="hub-column-title">аукционсотика — семьяны</div>
+          </header>
+          <div class="hub-column-main">
+            <div class="hub-column-main-ghost auction"></div>
+            <div class="hub-column-overlay-label">
+              <div class="hub-column-overlay-label-inner">
+                открыть аукцион в полноэкранном режиме
+              </div>
+            </div>
+          </div>
+          <footer class="hub-column-footer">
+            <span class="hub-column-tag">аукцион</span>
+            <span>дом · участок 43 сотки</span>
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <footer class="hub-footer">
+      сайтсотика · хаб · 3 гигантских окна · 2026
+    </footer>
+  </div>
+
+  <!-- FULLSCREEN: САЙТСОТИКА -->
+  <div class="hub-window-layer" data-window="site">
+    <div class="hub-window-shell">
+      <header class="hub-window-header">
+        <div class="hub-window-title-block">
+          <div class="hub-window-kicker">окно 1</div>
+          <div class="hub-window-title">сайтсотика — стрим</div>
+        </div>
+        <div class="hub-window-meta">основной сайт · машины · трассы · стрим</div>
+        <button class="hub-window-close" data-close-window>
+          <span>назад к хабу</span>
+          <span>✕</span>
+        </button>
+      </header>
+      <div class="hub-window-body">
+        <div class="hub-window-iframe-wrap">
+          <iframe
+            class="hub-window-iframe"
+            src="http://127.0.0.1/index.html"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+      <footer class="hub-window-footer">
+        <span>сайтсотика · полноэкранное окно</span>
+        <span>замени src на боевой url vercel при деплое</span>
+      </footer>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <section class="hero" id="top">
-      <div>
-        <div class="hero-tags">
-          <div class="tag">Обучение вождению на симуляторе</div>
-          <div class="tag">Практика без риска</div>
+  <!-- FULLSCREEN: ДОНАТ -->
+  <div class="hub-window-layer" data-window="donate">
+    <div class="hub-window-shell">
+      <header class="hub-window-header">
+        <div class="hub-window-title-block">
+          <div class="hub-window-kicker">окно 2</div>
+          <div class="hub-window-title">донаты — api donationalerts</div>
         </div>
-        <h1 class="hero-title">
-          <span>Дмитрий Передний</span><br>
-          преподаватель вождения на гоночном симуляторе
-        </h1>
-        <p class="hero-sub">
-          Помогаю безопасно освоить основы вождения, траектории, работу с педалями и рулём на гоночном симуляторе.
-          Это тренировочная среда, где можно допускать ошибки, разбирать их и прогрессировать без риска для жизни и автомобиля.
-        </p>
-        <div class="hero-actions">
-          <button class="btn btn-primary" onclick="document.getElementById('lessons').scrollIntoView({behavior:'smooth'})">Посмотреть формат занятий</button>
-          <button class="btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Подробнее обо мне</button>
-        </div>
-        <p class="hero-note">
-          <strong>Важно:</strong> это образовательный курс на симуляторе, а не выдача прав и не автошкола.
-        </p>
-      </div>
-      <div class="hero-card" aria-hidden="true">
-        <div class="hero-card-inner">
-          <div class="hero-card-header">
-            <div class="hero-card-title">Сессия тренировки</div>
-            <div class="hero-card-status">
-              <span class="hero-card-status-dot"></span>
-              Онлайн‑занятие активно
-            </div>
-          </div>
-          <div class="hero-track">
-            <div class="hero-track-lane">
-              <div class="hero-track-car"></div>
-            </div>
-            <div class="hero-track-meta">
-              <span>Режим: <strong>Тренировка траекторий</strong></span>
-              <span>Сессия: <strong>45 минут</strong></span>
-            </div>
-          </div>
-          <div class="hero-metrics">
-            <div class="metric">
-              <div class="metric-label">Фокус</div>
-              <div class="metric-value">Контроль руля и педалей</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Цель</div>
-              <div class="metric-value">Плавность и стабильность</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">Формат</div>
-              <div class="metric-value">Онлайн + разбор</div>
-            </div>
-          </div>
+        <div class="hub-window-meta">донат · цели · правила · api на бэке</div>
+        <button class="hub-window-close" data-close-window>
+          <span>назад к хабу</span>
+          <span>✕</span>
+        </button>
+      </header>
+      <div class="hub-window-body">
+        <div class="hub-window-iframe-wrap">
+          <iframe
+            class="hub-window-iframe"
+            src="http://127.0.0.1/donations.html"
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
-    </section>
+      <footer class="hub-window-footer">
+        <span>донаты · интерфейс</span>
+        <span>donationalerts · логика и api на сервере</span>
+      </footer>
+    </div>
+  </div>
 
-    <section id="about">
-      <div class="section-label">О преподавателе</div>
-      <h2 class="section-title">Кто я и чему обучаю</h2>
-      <div class="section-grid">
-        <div class="card">
-          <h3>Дмитрий Передний — преподаватель вождения на симуляторе</h3>
-          <p>
-            Я работаю с гоночными симуляторами и использую их как безопасную платформу для обучения базовым и продвинутым
-            навыкам вождения. На занятиях мы разбираем не только «как ехать быстро», но и то, как формируется контроль
-            автомобиля, внимание, работа с ошибками и понимание траекторий.
-          </p>
-          <p>
-            Формат обучения подходит тем, кто:
-          </p>
-          <ul class="list">
-            <li>хочет безопасно познакомиться с вождением через симулятор;</li>
-            <li>интересуется гоночной тематикой и хочет понимать, как работают пилоты;</li>
-            <li>уже водит, но хочет улучшить чувство машины и траектории в игровой среде;</li>
-            <li>использует симулятор как тренировочный инструмент.</li>
-          </ul>
-          <div class="pill-row">
-            <div class="pill">Онлайн‑формат</div>
-            <div class="pill">Разбор ошибок</div>
-            <div class="pill">Пошаговое обучение</div>
-            <div class="pill">Безопасная среда</div>
-          </div>
+  <!-- FULLSCREEN: АУКЦИОН -->
+  <div class="hub-window-layer" data-window="auction">
+    <div class="hub-window-shell">
+      <header class="hub-window-header">
+        <div class="hub-window-title-block">
+          <div class="hub-window-kicker">окно 3</div>
+          <div class="hub-window-title">аукционсотика — семьяны</div>
         </div>
-        <div class="card">
-          <h3>Образовательный формат, а не автошкола</h3>
-          <p>
-            Важно понимать: мои занятия — это образовательный курс на симуляторе. Я не выдаю права, не заменяю автошколу
-            и не оформляю официальные документы. Моя задача — дать тебе практическое понимание вождения в безопасной
-            цифровой среде, чтобы ты мог осознанно подходить к реальному вождению или просто развиваться в сим‑рейсинге.
-          </p>
-          <p>
-            На сайте представлены:
-          </p>
-          <ul class="list">
-            <li>описание программы обучения;</li>
-            <li>структура уроков и примеры тем;</li>
-            <li>формат обратной связи и разборов;</li>
-            <li>контакты для связи и записи на занятия.</li>
-          </ul>
+        <div class="hub-window-meta">дом · 43 сотки · условия торгов</div>
+        <button class="hub-window-close" data-close-window>
+          <span>назад к хабу</span>
+          <span>✕</span>
+        </button>
+      </header>
+      <div class="hub-window-body">
+        <div class="hub-window-iframe-wrap">
+          <iframe
+            class="hub-window-iframe"
+            src="http://127.0.0.1/s2.html"
+            loading="lazy"
+          ></iframe>
         </div>
       </div>
-    </section>
+      <footer class="hub-window-footer">
+        <span>аукционсотика · дом в семьянах</span>
+        <span>лот: дом + участок 43 сотки</span>
+      </footer>
+    </div>
+  </div>
+</div>
 
-    <section id="program">
-      <div class="section-label">Программа</div>
-      <h2 class="section-title">Как устроено обучение на симуляторе</h2>
-      <div class="section-grid">
-        <div class="card">
-          <h3>Структура курса</h3>
-          <p>
-            Обучение строится по модульной системе: от базового знакомства с управлением до более сложных элементов
-            вроде траекторий, точек торможения и стабильности круга. Каждый модуль можно проходить отдельно или в рамках
-            последовательной программы.
-          </p>
-          <ul class="list">
-            <li>Модуль 1: знакомство с симулятором и управлением;</li>
-            <li>Модуль 2: базовые траектории и работа с рулём;</li>
-            <li>Модуль 3: торможение, ускорение, плавность;</li>
-            <li>Модуль 4: стабильность круга и работа над ошибками;</li>
-            <li>Модуль 5: продвинутые элементы (по договорённости).</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>Формат занятий</h3>
-          <p>
-            Занятия проходят онлайн. Мы подключаемся к сессии, я наблюдаю за твоей ездой, даю комментарии в реальном
-            времени и фиксирую моменты, которые нужно доработать. После сессии возможен короткий разбор и рекомендации
-            по самостоятельной практике.
-          </p>
-          <ul class="list">
-            <li>Продолжительность одного занятия: 45–60 минут;</li>
-            <li>Формат: онлайн‑сессия + голосовая связь;</li>
-            <li>Платформа: гоночный симулятор (по договорённости);</li>
-            <li>Обратная связь: устные комментарии, при необходимости — текстовые заметки.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+<script>
+  const openColumns = document.querySelectorAll('.hub-column[data-open-window]');
+  const layers = document.querySelectorAll('.hub-window-layer');
+  const closeButtons = document.querySelectorAll('[data-close-window]');
 
-    <section id="lessons">
-      <div class="section-label">Уроки</div>
-      <h2 class="section-title">Примеры тем занятий</h2>
-      <div class="card">
-        <p>
-          Ниже — примеры уроков, которые я провожу на симуляторе. Конкретное содержание подстраивается под твой уровень
-          и задачи. Эти материалы можно использовать как описание образовательной программы при подаче заявки в Canva
-          for Education.
-        </p>
-        <div class="lessons-list">
-          <div class="lesson">
-            <div class="lesson-title">Урок 1. Знакомство с симулятором и управлением</div>
-            <div class="lesson-meta">
-              Цель: понять базовую логику управления, чувствительность руля и педалей, научиться уверенно двигаться по прямой и входить в простые повороты.
-            </div>
-          </div>
-          <div class="lesson">
-            <div class="lesson-title">Урок 2. Траектории и работа с рулём</div>
-            <div class="lesson-meta">
-              Цель: освоить базовые траектории, научиться правильно заходить в поворот, выбирать точку входа и выхода, работать с рулём без резких движений.
-            </div>
-          </div>
-          <div class="lesson">
-            <div class="lesson-title">Урок 3. Торможение и ускорение</div>
-            <div class="lesson-meta">
-              Цель: научиться плавно тормозить и разгоняться, понимать, как распределяется сцепление, и почему резкие движения делают машину нестабильной.
-            </div>
-          </div>
-          <div class="lesson">
-            <div class="lesson-title">Урок 4. Стабильность круга</div>
-            <div class="lesson-meta">
-              Цель: собрать несколько кругов подряд без грубых ошибок, удерживать ритм, контролировать внимание и не «ломаться» после одной неточности.
-            </div>
-          </div>
-          <div class="lesson">
-            <div class="lesson-title">Урок 5. Разбор ошибок и развитие</div>
-            <div class="lesson-meta">
-              Цель: разобрать записи сессии (если есть), выделить повторяющиеся ошибки, составить план дальнейшей практики и развития навыков.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  function openWindow(name) {
+    layers.forEach(layer => {
+      if (layer.getAttribute('data-window') === name) {
+        layer.classList.add('visible');
+      } else {
+        layer.classList.remove('visible');
+      }
+    });
+  }
 
-    <section id="contact">
-      <div class="section-label">Контакты</div>
-      <h2 class="section-title">Связаться со мной</h2>
-      <div class="contact-grid">
-        <div class="card">
-          <h3>Как со мной связаться</h3>
-          <p class="contact-item">
-            <strong>Формат связи:</strong> напишите мне в удобный мессенджер или на почту, кратко опишите свой опыт и цель занятий.
-          </p>
-          <p class="contact-item">
-            <strong>Пример сообщения:</strong><br>
-            «Здравствуйте, меня зовут [имя]. Хочу позаниматься вождением на симуляторе. Уровень: [новичок / есть опыт]. Цель: [освоить базу / улучшить траектории / подготовиться к реальному вождению].»
-          </p>
-          <p class="contact-note">
-            Эти контакты и описание можно использовать как часть подтверждения образовательной деятельности при подаче заявки в Canva for Education.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Информация для Canva for Education</h3>
-          <p>
-            При подаче заявки вы можете указать этот сайт как платформу, на которой вы ведёте образовательную деятельность
-            по обучению вождению на симуляторе. Формулировка для заявки:
-          </p>
-          <p style="font-size:13px;color:var(--muted);margin-top:4px;">
-            «I teach online using a driving simulator. On my website I publish the structure of my lessons, educational
-            materials and description of my training program. I use Canva to prepare visual materials, diagrams and
-            explanations for my students.»
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
+  function closeAllWindows() {
+    layers.forEach(layer => layer.classList.remove('visible'));
+  }
 
-  <footer>
-    Дмитрий Передний · Обучение вождению на гоночном симуляторе · Образовательный неофициальный курс на базе симулятора
-  </footer>
+  openColumns.forEach(col => {
+    col.addEventListener('click', () => {
+      const name = col.getAttribute('data-open-window');
+      if (!name) return;
+      openWindow(name);
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      closeAllWindows();
+    });
+  });
+
+  layers.forEach(layer => {
+    layer.addEventListener('click', e => {
+      if (e.target === layer) {
+        closeAllWindows();
+      }
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeAllWindows();
+    }
+  });
+</script>
+
 </body>
 </html>
